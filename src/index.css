@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+}
+
+body {
+      font-family: "Lato", sans-serif;
+}
+/* ----------------------------------------------------------- */
+/* -------------------HEADER-------------------------- */
+/* --------------------------------------------------------- */
+.header {
+      display: flex;
+      align-items: center;
+      background-color: #f7e62d;
+      height: 10vh;
+}
+
+h1 {
+      text-transform: uppercase;
+}
+.logo {
+      width: 10vh;
+      margin-right: 5px;
+}
+
+/* ----------------------------------------------------------- */
+/* -------------------CONTAINER-------------------------- */
+/* --------------------------------------------------------- */
+.content {
+      height: 85vh;
+}
+/* ----------------------------------------------------------- */
+/* -------------------LOGFORM-------------------------- */
+/* --------------------------------------------------------- */
+a {
+      color: #92badd;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 400;
+}
+
+h2 {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 40px 8px 10px 8px;
+      color: #cccccc;
+}
+
+/* STRUCTURE */
+
+.wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      padding: 20px;
+}
+
+#formContent {
+      border-radius: 10px 10px 10px 10px;
+      background: #fff;
+      padding: 30px;
+      width: 90%;
+      max-width: 450px;
+      position: relative;
+      padding: 0px;
+      box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+      text-align: center;
+}
+
+#formFooter {
+      background-color: #f6f6f6;
+      border-top: 1px solid #dce8f1;
+      padding: 25px;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+}
+
+/* TABS */
+
+h2.inactive {
+      color: #cccccc;
+}
+
+h2.active {
+      color: #0d0d0d;
+      border-bottom: 2px solid #5fbae9;
+}
+
+/* FORM TYPOGRAPHY*/
+
+input[type="submit"] {
+      background-color: #56baed;
+      border: none;
+      color: white;
+      padding: 15px 80px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 13px;
+      box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+      border-radius: 5px 5px 5px 5px;
+      margin: 5px 20px 40px 20px;
+      transition: all 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+      background-color: #39ace7;
+}
+
+input[type="submit"]:active {
+      transform: scale(0.95);
+}
+
+#user-name,
+#password {
+      background-color: #f6f6f6;
+      border: none;
+      color: #0d0d0d;
+      padding: 15px 32px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+      width: 85%;
+      border: 2px solid #f6f6f6;
+      transition: all 0.5s ease-in-out;
+      border-radius: 5px 5px 5px 5px;
+}
+
+#user-name:focus,
+#password:focus {
+      background-color: #fff;
+      border-bottom: 2px solid #5fbae9;
+}
+
+input[type="text"]:placeholder {
+      color: #cccccc;
+}
+
+/* ANIMATIONS */
+
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+      animation-name: fadeInDown;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+      0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+      }
+      100% {
+            opacity: 1;
+            transform: none;
+      }
+}
+
+@keyframes fadeInDown {
+      0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+      }
+      100% {
+            opacity: 1;
+            transform: none;
+      }
+}
+
+/* Simple CSS3 Fade-in Animation */
+@-webkit-keyframes fadeIn {
+      from {
+            opacity: 0;
+      }
+      to {
+            opacity: 1;
+      }
+}
+@-moz-keyframes fadeIn {
+      from {
+            opacity: 0;
+      }
+      to {
+            opacity: 1;
+      }
+}
+@keyframes fadeIn {
+      from {
+            opacity: 0;
+      }
+      to {
+            opacity: 1;
+      }
+}
+
+.fadeIn {
+      opacity: 0;
+      animation: fadeIn ease-in 1;
+      animation-fill-mode: forwards;
+
+      animation-duration: 1s;
+}
+
+.fadeIn.first {
+      animation-delay: 0.4s;
+}
+
+.fadeIn.second {
+      animation-delay: 0.6s;
+}
+
+.fadeIn.third {
+      animation-delay: 0.8s;
+}
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+      display: block;
+      left: 0;
+      bottom: -10px;
+      width: 0;
+      height: 2px;
+      background-color: #56baed;
+      content: "";
+      transition: width 0.2s;
+}
+
+.underlineHover:hover {
+      color: #0d0d0d;
+}
+
+.underlineHover:hover:after {
+      width: 100%;
+}
+
+*:focus {
+      outline: none;
+}
+/* ----------------------------------------------------------- */
+/* ----------------------FOOTER------------------------ */
+/* --------------------------------------------------------- */
+.footer {
+      height: 5vh;
+      line-height: 5vh;
+      text-align: center;
+      position: relative;
+      background-color: #f7e62d;
+}
+/* ----------------------------------------------------------- */
+/* --------------------ADMINPAGE--------------------- */
+/* --------------------------------------------------------- */
+/* scroll bar styled */
+::-webkit-scrollbar {
+      width: 5px;
+      height: 6px;
+}
+
+::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px #a5aaad;
+      border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+      background: #3ea175;
+      border-radius: 10px;
+}
+
+::-webkit-slider-thumb:hover {
+      background: #a5aaad;
+}
+/* general styling */
+.text-primary-p {
+      color: #a5aaad;
+      font-size: 14px;
+      font-weight: 700;
+}
+
+.font-bold {
+      font-weight: 700;
+}
+
+.text-title {
+      color: #2e4a66;
+}
+
+.text-lightblue {
+      color: #469cac;
+}
+
+.text-red {
+      color: #cc3d38;
+}
+
+.text-yellow {
+      color: #a98921;
+}
+
+.text-green {
+      color: #3b9668;
+}
+
+.admin-wrapper {
+      display: grid;
+      height: 85vh;
+      grid-template-columns: 0.8fr 1fr 1fr 1fr;
+      /* grid-template-rows: 0.2fr 3fr; */
+      grid-template-rows: 3fr;
+      grid-template-areas:
+            "sidebar nav nav nav"
+            "sidebar main main main";
+}
+
+@media only screen and (max-width:978px) {
+      .admin-wrapper {
+            grid-template-columns: 1fr;
+            grid-template-rows: 0.2fr 3fr;
+            grid-template-areas:
+                  "nav"
+                  "main";
+      }
+}
