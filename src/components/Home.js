@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import NavBar from "./NavBar/NavBar";
+import NavBar from "./NavBar/NavBar";
 import SideBar from "./SideBar/SideBar";
 import AdminWrapper from "./AdminWrapper/AdminWrapper";
 
@@ -16,7 +16,7 @@ const Home = () => {
 
       return (
             <div className="admin-wrapper">
-                  {/* <NavBar sideBarOpen={sideBarOpen} openSideBar={openSideBar} /> */}
+                  <NavBar sideBarOpen={sideBarOpen} openSideBar={openSideBar} />
                   <AdminWrapper />
                   <SideBar
                         sideBarOpen={sideBarOpen}
