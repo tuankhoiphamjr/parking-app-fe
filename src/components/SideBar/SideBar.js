@@ -21,7 +21,7 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                   <div className="sidebar__menu">
                         <div className="sidebar__link active_menu_link">
                               <i className="fa fa-home"></i>
-                              <a href="/">Dashboard</a>
+                              <a href="/home">Dashboard</a>
                         </div>
                         <h2>User</h2>
                         <div className="sidebar__link">
@@ -29,24 +29,24 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                               <a href="/">Manage Acount</a>
                         </div>
                         <div className="sidebar__link">
-                              <i className="far fa-building"></i>
-                              <a href="/">Notification</a>
+                              <i className="fas fa-exclamation-circle"></i>
+                              <a href="/notify">Notification</a>
                         </div>
                         <div className="sidebar__link">
-                              <i className="fa fa-archive"></i>
+                              <i className="fas fa-envelope-square"></i>
                               <a href="/">Message</a>
                         </div>
                         <h2>Parking owner</h2>
                         <div className="sidebar__link">
-                              <i className="fa fa-question"></i>
-                              <a href="/">New Owner</a>
+                              <i className="fas fa-users-medical"></i>
+                              <a href="/newOwner">New Owner</a>
                         </div>
                         <div className="sidebar__link">
-                              <i className="fa fa-sign-out"></i>
+                              <i className="fas fa-video"></i>
                               <a href="/">Parking Monitor</a>
                         </div>
                         <div className="sidebar__link">
-                              <i className="fa fa-archive"></i>
+                              <i className="fas fa-envelope-square"></i>
                               <a href="/">Message</a>
                         </div>
                         <div className="sidebar__logout">

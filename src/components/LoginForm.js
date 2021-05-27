@@ -1,26 +1,25 @@
 import { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { LogInApi } from "../api";
 
 const LoginForm = () => {
       const [username, setUsername] = useState("");
       const [password, setPassword] = useState("");
-      // const API_URL = "http://localhost:8080";
-
-      const login = () => {
+      const login = async (e) => {
+            e.preventDefault();
             if (username === "") {
                   alert("Username must not be empty!");
             } else {
-                  axios.post("http://192.168.19.105:8080/api/auth/signin", {
+                  const data = {
                         phoneNumber: username,
                         password: password,
-                  })
-                        .then(function (response) {
-                              console.log(response);
-                        })
-                        .catch(function (error) {
-                              alert("Wrong Username or Password");
-                        });
+                        role: "admin",
+                  };
+                  let response = await LogInApi.login(data);
+                  if (response?.status) {
+                        window.location.href = "/home";
+                  } else {
+                        alert("Đăng nhập thất bại");
+                  }
             }
       };
       return (
@@ -43,17 +42,12 @@ const LoginForm = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                   />
-                  <Link to="/home">
-                        <input
-                              type="submit"
-                              className="fadeIn third"
-                              value="Log In"
-                              onClick={(e) => {
-                                    e.preventDefault();
-                                    login();
-                              }}
-                        />
-                  </Link>
+                  <input
+                        type="submit"
+                        className="fadeIn third"
+                        value="Log In"
+                        onClick={login}
+                  />
             </form>
       );
 };

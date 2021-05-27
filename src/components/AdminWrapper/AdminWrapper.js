@@ -27,7 +27,7 @@ const AdminWrapper = () => {
                                     </div>
                               </div>
                               <div className="card">
-                                    <i className="fa fa-calendar fa-2x text-red"></i>
+                                    <i className="fas fa-user-tie fa-2x text-red"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
                                                 Number of Owner
@@ -38,10 +38,10 @@ const AdminWrapper = () => {
                                     </div>
                               </div>
                               <div className="card">
-                                    <i className="fa fa-video fa-2x text-yellow"></i>
+                                    <i className="fas fa-parking fa-2x text-yellow"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                New user
+                                                Number of Parking
                                           </p>
                                           <span className="font-bold text-title">
                                                 340
@@ -71,13 +71,13 @@ const AdminWrapper = () => {
                                     </div>
                                     <Chart />
                               </div>
-                              <div className="charts__right">
+                              {/* <div className="charts__right">
                                     <div className="charts__right__title">
                                           <div>
                                                 <h1>Stats reports</h1>
                                                 <p>Vietnam</p>
                                           </div>
-                                          <i className="fa fa-use"></i>
+                                          <i className="fa fa-usd"></i>
                                     </div>
                                     <div className="charts__right__cards">
                                           <div className="card1">
@@ -97,7 +97,7 @@ const AdminWrapper = () => {
                                                 <p>$7501</p>
                                           </div>
                                     </div>
-                              </div>
+                              </div> */}
                         </div>
                   </div>
             </main>

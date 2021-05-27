@@ -20,6 +20,8 @@ function App() {
                                     )}
                               />
                               <Route path="/home" component={Home} />
+                              <Route path="/notify" component={Home} />
+                              <Route path="/newOwner" component={Home} />
                         </div>
                         <Footer />
                   </div>
