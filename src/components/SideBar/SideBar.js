@@ -26,7 +26,7 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                         <h2>User</h2>
                         <div className="sidebar__link">
                               <i className="fa fa-user-secret"></i>
-                              <a href="/">Manage Acount</a>
+                              <a>Manage Acount</a>
                         </div>
                         <div className="sidebar__link">
                               <i className="fas fa-exclamation-circle"></i>
@@ -34,7 +34,7 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                         </div>
                         <div className="sidebar__link">
                               <i className="fas fa-envelope-square"></i>
-                              <a href="/">Message</a>
+                              <a>Message</a>
                         </div>
                         <h2>Parking owner</h2>
                         <div className="sidebar__link">
@@ -43,15 +43,15 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                         </div>
                         <div className="sidebar__link">
                               <i className="fas fa-video"></i>
-                              <a href="/">Parking Monitor</a>
+                              <a>Parking Monitor</a>
                         </div>
                         <div className="sidebar__link">
                               <i className="fas fa-envelope-square"></i>
-                              <a href="/">Message</a>
+                              <a>Message</a>
                         </div>
                         <div className="sidebar__logout">
                               <i className="far fa-power-off"></i>
-                              <a href="/">Log out</a>
+                              <a>Log out</a>
                         </div>
                   </div>
             </div>

@@ -11,7 +11,7 @@ function App() {
                         <Header />
                         <div className="content">
                               <Route
-                                    path="/"
+                                    path="/login"
                                     exact
                                     render={(props) => (
                                           <>
