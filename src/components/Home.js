@@ -4,9 +4,24 @@ import NavBar from "./NavBar/NavBar";
 import SideBar from "./SideBar/SideBar";
 // import AdminWrapper from "./AdminWrapper/AdminWrapper";
 import routes from "./Routes";
+import { LogInApi } from "../api";
+import { useEffect } from "react";
 
 const Home = () => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
+      const [adminName, setAdminName] = useState("");
+      const [adminFullName, setAdminFullName] = useState("");
+
+      const setAdminInfo = async () => {
+            let response = await LogInApi.fectchAdminInfo();
+            if (response?.status) {
+            } else {
+            }
+      };
+
+      useEffect(() => {
+            setAdminInfo();
+      }, []);
 
       const openSideBar = () => {
             setSideBarOpen(true);
@@ -15,6 +30,7 @@ const Home = () => {
       const closeSideBar = () => {
             setSideBarOpen(false);
       };
+
       const showContentMenu = (routes) => {
             var result = null;
 

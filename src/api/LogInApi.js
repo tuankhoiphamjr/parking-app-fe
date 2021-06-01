@@ -11,6 +11,18 @@ const login = async (data) => {
       }
 };
 
+const fectchAdminInfo = async () => {
+      try {
+            const url = `${BaseURL}/user/getUserInfoByIdForUser`;
+            const res = await axios.post(url, {}, {});
+            console.log(res);
+            return res;
+      } catch (error) {
+            console.log("Err when get user info:", error.message);
+      }
+};
+
 export default {
       login,
+      fectchAdminInfo,
 };
