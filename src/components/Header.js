@@ -10,7 +10,7 @@ const Header = ({ title }) => {
       );
 };
 Header.defaultProps = {
-      title: "parking app name",
+      title: "parking finder",
 };
 
 Header.propTypes = {

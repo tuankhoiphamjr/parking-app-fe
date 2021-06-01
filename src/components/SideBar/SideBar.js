@@ -1,7 +1,7 @@
 import "./SideBar.css";
 import logo from "../../assets/avatar/avatar.jfif";
 
-const SideBar = ({ sideBarOpen, closeSideBar }) => {
+const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
       return (
             <div
                   className={sideBarOpen ? "sidebar-responsive" : ""}
@@ -10,7 +10,7 @@ const SideBar = ({ sideBarOpen, closeSideBar }) => {
                   <div className="sidebar__title">
                         <div className="sidebar__img">
                               <img src={logo} alt="logo" />
-                              <h1>Admin name</h1>
+                              <h1>{adminName}</h1>
                         </div>
                         <i
                               className="fa fa-times"

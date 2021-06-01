@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./NavBar/NavBar";
 import SideBar from "./SideBar/SideBar";
-// import AdminWrapper from "./AdminWrapper/AdminWrapper";
 import routes from "./Routes";
 import { LogInApi } from "../api";
 import { useEffect } from "react";
@@ -10,11 +9,11 @@ import { useEffect } from "react";
 const Home = () => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
       const [adminName, setAdminName] = useState("");
-      const [adminFullName, setAdminFullName] = useState("");
 
       const setAdminInfo = async () => {
             let response = await LogInApi.fectchAdminInfo();
             if (response?.status) {
+                  setAdminName(response.data.lastName);
             } else {
             }
       };
@@ -58,6 +57,7 @@ const Home = () => {
                   <SideBar
                         sideBarOpen={sideBarOpen}
                         closeSideBar={closeSideBar}
+                        adminName={adminName}
                   />
             </div>
       );

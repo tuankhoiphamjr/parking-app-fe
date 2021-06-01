@@ -17,7 +17,6 @@ const StartPage = () => {
                         window.location.href = "/login";
                   } else {
                         const user = JSON.parse(jsonValue);
-                        console.log(user);
                         const res = await LogInApi.login({
                               phoneNumber: user.result.phoneNumber,
                               password: user.password,
@@ -38,8 +37,7 @@ const StartPage = () => {
                         }
                   }
             } catch (e) {
-                  console.log("ngu");
-                  // window.location.href = "/login";
+                  window.location.href = "/login";
             }
       };
       return <div></div>;

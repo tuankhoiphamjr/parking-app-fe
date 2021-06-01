@@ -1,15 +1,35 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
+import { useState, useEffect } from "react";
 import hello from "../../assets/avatar/avatar.jfif";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const AdminWrapper = () => {
+      const [adminFullName, setAdminFullName] = useState("");
+
+      const getAdminInfo = async () => {
+            try {
+                  const jsonValue = await reactLocalStorage.getObject("admin");
+                  setAdminFullName(
+                        `${JSON.parse(jsonValue).result.firstName} ${
+                              JSON.parse(jsonValue).result.lastName
+                        }`
+                  );
+            } catch (error) {
+                  console.log("Err when get token from local storage");
+                  return false;
+            }
+      };
+      useEffect(() => {
+            getAdminInfo();
+      }, []);
       return (
             <main>
                   <div className="main__container">
                         <div className="main__title">
                               <img src={hello} alt="hello" />
                               <div className="main__greeting">
-                                    <h1>Admin</h1>
+                                    <h1>{adminFullName}</h1>
                                     <p>Welcome to admin dashboard</p>
                               </div>
                         </div>
