@@ -3,9 +3,14 @@ import Chart from "../Charts/Chart";
 import { useState, useEffect } from "react";
 import hello from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { CountApi } from "../../api";
 
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");
+      const [numOfUser, setNumOfUser] = useState();
+      const [numOfOwner, setNumOfOwner] = useState();
+      const [numOfParking, setNumOfParking] = useState();
+      const [numOfEvaluate, setNumOfEvaluate] = useState();
 
       const getAdminInfo = async () => {
             try {
@@ -20,8 +25,61 @@ const AdminWrapper = () => {
                   return false;
             }
       };
+
+      const getCountUser = async () => {
+            try {
+                  let response = await CountApi.getNumOfUser();
+                  if (response?.status) {
+                        try {
+                              setNumOfUser(response.data.numOfUser);
+                              setNumOfOwner(response.data.numOfOwner);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const getCountParking = async () => {
+            try {
+                  let response = await CountApi.getNumOfParking();
+                  if (response?.status) {
+                        try {
+                              setNumOfParking(response.data.numOfParking);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const getCountEvaluate = async () => {
+            try {
+                  let response = await CountApi.getNumOfEvaluate();
+                  if (response?.status) {
+                        try {
+                              setNumOfEvaluate(response.data.numOfEvaluate);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
       useEffect(() => {
             getAdminInfo();
+            getCountUser();
+            getCountParking();
+            getCountEvaluate();
       }, []);
       return (
             <main>
@@ -42,7 +100,7 @@ const AdminWrapper = () => {
                                                 Number of user
                                           </p>
                                           <span className="font-bold text-title">
-                                                57,238
+                                                {numOfUser}
                                           </span>
                                     </div>
                               </div>
@@ -53,7 +111,7 @@ const AdminWrapper = () => {
                                                 Number of Owner
                                           </p>
                                           <span className="font-bold text-title">
-                                                2467
+                                                {numOfOwner}
                                           </span>
                                     </div>
                               </div>
@@ -64,7 +122,7 @@ const AdminWrapper = () => {
                                                 Number of Parking
                                           </p>
                                           <span className="font-bold text-title">
-                                                340
+                                                {numOfParking}
                                           </span>
                                     </div>
                               </div>
@@ -72,10 +130,10 @@ const AdminWrapper = () => {
                                     <i className="fa fa-thumbs-up fa-2x text-green"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                New Owner
+                                                Number of Evaluate
                                           </p>
                                           <span className="font-bold text-title">
-                                                645
+                                                {numOfEvaluate}
                                           </span>
                                     </div>
                               </div>
