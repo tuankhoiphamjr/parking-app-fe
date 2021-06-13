@@ -5,16 +5,19 @@ import SideBar from "./SideBar/SideBar";
 import routes from "./Routes";
 import { LogInApi } from "../api";
 import { useEffect } from "react";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const Home = () => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
       const [adminName, setAdminName] = useState("");
 
       const setAdminInfo = async () => {
-            let response = await LogInApi.fectchAdminInfo();
-            if (response?.status) {
-                  setAdminName(response.data.lastName);
-            } else {
+            try {
+                  const jsonValue = await reactLocalStorage.getObject("admin");
+                  setAdminName(`${JSON.parse(jsonValue).result.lastName}`);
+            } catch (error) {
+                  console.log("Err when get token from local storage");
+                  return false;
             }
       };
 
