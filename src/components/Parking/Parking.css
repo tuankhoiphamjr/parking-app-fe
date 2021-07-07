@@ -1,0 +1,123 @@
+.parkingWrapper {
+      width: 100%;
+      background-color: white;
+      border-radius: 10px;
+      -webkit-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.37);
+      box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.37);
+      margin: 15px 0;
+}
+
+.parkingTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px 10px 20px;
+}
+
+.parkingLeft {
+      width: 70%;
+}
+
+.parkingInfos {
+      padding-right: 20px;
+}
+
+.parkingInfo {
+      margin: 5px 0;
+      list-style: none;
+      font-size: 16px;
+      display: flex;
+      align-items: flex-start;
+}
+
+.extraInfo{
+      display: none;
+}
+
+.extraInfo.active{
+      display: flex;
+}
+
+.parkingTitleBox {
+      display: flex;
+      align-items: center;
+}
+
+.parkingInfoIcon {
+      font-size: 17px !important;
+      margin-right: 5px;
+}
+
+.parkingTitle {
+      width: 120px;
+}
+
+.parkingPriceByVehicle{
+      display: flex;
+      justify-content: space-between;
+}
+
+.parkingVehicle{
+      width: 100px;
+}
+
+.parkingRight {
+      width: 30%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+}
+
+.parkingRight button {
+      width: 100%;
+}
+
+.parkingBottom {
+      background-color: #d2f6f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 0 0 10px 10px;
+}
+
+.parkingShowMore{
+      font-size: 14px;
+}
+
+.parkingBottom .moreIcon,
+.parkingBottom.active .lessIcon{
+      display: block !important;
+}
+
+.parkingBottom .lessIcon,
+.parkingBottom.active .moreIcon{
+      display: none !important;
+}
+
+
+@media only screen and (max-width: 1200px) {
+      .parkingRight {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: "button" "button";
+      }
+}
+
+@media only screen and (max-width: 568px) {
+      .main__container {
+            padding: 20px 0;
+      }
+      .parkingLeft{
+            width: 100%;
+      }
+      .parkingInfos{
+            padding-bottom: 20px;
+      }
+      .parkingRight{
+            width: 100%;
+      }
+      .parkingTop{
+            flex-wrap: wrap;
+      }
+}

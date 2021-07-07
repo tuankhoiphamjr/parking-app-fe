@@ -88,7 +88,7 @@ const AdminWrapper = () => {
                               <img src={hello} alt="hello" />
                               <div className="main__greeting">
                                     <h1>{adminFullName}</h1>
-                                    <p>Welcome to admin dashboard</p>
+                                    <p>Chào mừng bạn đã đến với giao diện Quản lý</p>
                               </div>
                         </div>
 
@@ -97,7 +97,7 @@ const AdminWrapper = () => {
                                     <i className="fas fa-users fa-2x text-lightblue"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of user
+                                                Số lượng người dùng
                                           </p>
                                           <span className="font-bold text-title">
                                                 {numOfUser}
@@ -108,7 +108,7 @@ const AdminWrapper = () => {
                                     <i className="fas fa-user-tie fa-2x text-red"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of Owner
+                                                Số lượng chủ bãi
                                           </p>
                                           <span className="font-bold text-title">
                                                 {numOfOwner}
@@ -119,7 +119,7 @@ const AdminWrapper = () => {
                                     <i className="fas fa-parking fa-2x text-yellow"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of Parking
+                                                Số lượng bãi xe
                                           </p>
                                           <span className="font-bold text-title">
                                                 {numOfParking}
@@ -130,7 +130,7 @@ const AdminWrapper = () => {
                                     <i className="fa fa-thumbs-up fa-2x text-green"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of Evaluate
+                                                Số lượng đánh giá
                                           </p>
                                           <span className="font-bold text-title">
                                                 {numOfEvaluate}
@@ -149,7 +149,7 @@ const AdminWrapper = () => {
                                     </div>
                                     <Chart />
                               </div>
-                              {/* <div className="charts__right">
+                              <div className="charts__right">
                                     <div className="charts__right__title">
                                           <div>
                                                 <h1>Stats reports</h1>
@@ -175,7 +175,7 @@ const AdminWrapper = () => {
                                                 <p>$7501</p>
                                           </div>
                                     </div>
-                              </div> */}
+                              </div>
                         </div>
                   </div>
             </main>

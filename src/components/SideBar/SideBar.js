@@ -1,85 +1,17 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SideBar.css";
 import logo from "../../assets/avatar/avatar.jfif";
 
 const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
-      const [homeActive, setHomeActive] = useState(true);
-      const [manageAccountActive, setManageAccountActive] = useState(false);
-      const [notifyActive, setNotifyActive] = useState(false);
-      const [userMessageActive, setUserMessageActive] = useState(false);
-      const [newOwnerActive, setNewOwnerActive] = useState(false);
-      const [parkingMonitorActive, setParkingMonitorActive] = useState(false);
-      const [ownerMessageActive, setOwnerMessageActive] = useState(false);
+      let link = document.querySelectorAll(".sidebar__link");
 
-      const setActiveHome = async () => {
-            setHomeActive(true);
-            setManageAccountActive(false);
-            setNotifyActive(false);
-            setUserMessageActive(false);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveManageAccount = async () => {
-            setHomeActive(false);
-            setManageAccountActive(true);
-            setNotifyActive(false);
-            setUserMessageActive(false);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveNotify = async () => {
-            setHomeActive(false);
-            setManageAccountActive(false);
-            setNotifyActive(true);
-            setUserMessageActive(false);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveUserMessage = async () => {
-            setHomeActive(false);
-            setManageAccountActive(false);
-            setNotifyActive(false);
-            setUserMessageActive(true);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveNewOwner = async () => {
-            setHomeActive(false);
-            setManageAccountActive(false);
-            setNotifyActive(false);
-            setUserMessageActive(false);
-            setNewOwnerActive(true);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveParkingMonitor = async () => {
-            setHomeActive(false);
-            setManageAccountActive(false);
-            setNotifyActive(false);
-            setUserMessageActive(false);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(true);
-            setOwnerMessageActive(false);
-      };
-
-      const setActiveOwnerMessage = async () => {
-            setHomeActive(false);
-            setManageAccountActive(false);
-            setNotifyActive(false);
-            setUserMessageActive(false);
-            setNewOwnerActive(false);
-            setParkingMonitorActive(false);
-            setOwnerMessageActive(true);
+      const handleOnClick = (e) => {
+            let j = 0;
+            while (j < link.length) {
+                  link[j++].className = "sidebar__link";
+            }
+            console.log(e.target.parentElement);
+            e.target.parentElement.className = "sidebar__link active_menu_link";
       };
 
       return (
@@ -99,114 +31,85 @@ const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
                         ></i>
                   </div>
                   <div className="sidebar__menu">
-                        <div
-                              className={`sidebar__link ${
-                                    homeActive ? "active_menu_link" : ""
-                              }`}
-                        >
+                        <div className={`sidebar__link active_menu_link`}>
                               <Link
                                     to="/home"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveHome}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fa fa-home"></i>
                                     Dashboard
                               </Link>
                         </div>
-                        <h2>User</h2>
-                        <div
-                              className={`sidebar__link ${
-                                    manageAccountActive
-                                          ? "active_menu_link"
-                                          : ""
-                              }`}
-                        >
+                        <h2>Người dùng</h2>
+                        <div className={`sidebar__link `}>
                               <Link
                                     to="/home"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveManageAccount}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fa fa-user-secret"></i>
-                                    Manage Acount
+                                    Quản lý tài khoản
                               </Link>
                         </div>
-                        <div
-                              className={`sidebar__link ${
-                                    notifyActive ? "active_menu_link" : ""
-                              }`}
-                        >
+                        <div className={`sidebar__link`}>
                               <Link
                                     to="/notify"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveNotify}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fas fa-exclamation-circle"></i>
-                                    Notification
+                                    Thông báo
                               </Link>
                         </div>
-                        <div
-                              className={`sidebar__link ${
-                                    userMessageActive ? "active_menu_link" : ""
-                              }`}
-                        >
+                        <div className={`sidebar__link`}>
                               <Link
                                     to="/notify"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveUserMessage}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fas fa-envelope-square"></i>
-                                    Message
+                                    Tin nhắn
                               </Link>
                         </div>
-                        <h2>Owner</h2>
-                        <div
-                              className={`sidebar__link ${
-                                    newOwnerActive ? "active_menu_link" : ""
-                              }`}
-                        >
+                        <h2>Chủ bãi</h2>
+                        <div className={`sidebar__link`}>
                               <Link
                                     to="/newOwner"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveNewOwner}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fas fa-users-medical"></i>
-                                    New Owner
+                                    Bãi xe mới
                               </Link>
                         </div>
-                        <div
-                              className={`sidebar__link ${
-                                    parkingMonitorActive
-                                          ? "active_menu_link"
-                                          : ""
-                              }`}
-                        >
+                        <div className={`sidebar__link`}>
                               <Link
                                     to="/newOwner"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveParkingMonitor}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fas fa-video"></i>
-                                    Parking Monitor
+                                    Quản lý bãi xe
                               </Link>
                         </div>
-                        <div
-                              className={`sidebar__link ${
-                                    ownerMessageActive ? "active_menu_link" : ""
-                              }`}
-                        >
+                        <div className={`sidebar__link`}>
                               <Link
                                     to="/newOwner"
                                     style={{ width: "100%", height: "100%" }}
-                                    onClick={setActiveOwnerMessage}
+                                    onClick={handleOnClick}
                               >
                                     <i className="fas fa-envelope-square"></i>
-                                    Message
+                                    Tin nhắn
                               </Link>
                         </div>
                         <div className="sidebar__logout">
-                              <Link style={{ width: "100%", height: "100%" }}>
+                              <Link
+                                    to="#"
+                                    style={{ width: "100%", height: "100%" }}
+                              >
                                     <i className="far fa-power-off"></i>
-                                    Log out
+                                    Đăng xuất
                               </Link>
                         </div>
                   </div>

@@ -9,6 +9,5 @@ export const userReducers = (state = {}, action) => {
                   return {};
             default:
                   return {};
-                  break;
       }
 };

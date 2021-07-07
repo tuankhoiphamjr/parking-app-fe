@@ -12,7 +12,7 @@ const login = async (data) => {
       }
 };
 
-const fectchAdminInfo = async () => {
+const fetchAdminInfo = async () => {
       try {
             const token = await getToken();
             const url = `${BaseURL}/user/getUserInfoByIdForUser`;
@@ -29,7 +29,9 @@ const fectchAdminInfo = async () => {
       }
 };
 
-export default {
+const LoginApi = {
       login,
-      fectchAdminInfo,
+      fetchAdminInfo,
 };
+
+export default LoginApi;

@@ -11,8 +11,8 @@ const signOut = () => {
             type: SIGN_OUT,
       };
 };
-
-export default {
+let userAction = {
       signInUpSuccess,
       signOut,
 };
+export default userAction;

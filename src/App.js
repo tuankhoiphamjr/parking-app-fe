@@ -6,8 +6,26 @@ import LogHome from "./components/LogHome";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import StartPage from "./components/StartPage";
+import { useState, useEffect } from "react";
+
+import { reactLocalStorage } from "reactjs-localstorage";
 
 function App() {
+      const [adminName, setAdminName] = useState("");
+
+      const setAdminInfo = async () => {
+            try {
+                  const jsonValue = await reactLocalStorage.getObject("admin");
+                  setAdminName(`${JSON.parse(jsonValue).result.lastName}`);
+            } catch (error) {
+                  console.log("Err when get token from local storage");
+                  return false;
+            }
+      };
+
+      useEffect(() => {
+            setAdminInfo();
+      }, []);
       return (
             <Provider store={store}>
                   <Router>
@@ -31,9 +49,42 @@ function App() {
                                                 </>
                                           )}
                                     />
-                                    <Route path="/home" component={Home} />
-                                    <Route path="/notify" component={Home} />
-                                    <Route path="/newOwner" component={Home} />
+                                    <Route
+                                          path="/home"
+                                          render={(props) => (
+                                                <>
+                                                      <Home
+                                                            adminName={
+                                                                  adminName
+                                                            }
+                                                      />
+                                                </>
+                                          )}
+                                    />
+                                    <Route
+                                          path="/notify"
+                                          render={(props) => (
+                                                <>
+                                                      <Home
+                                                            adminName={
+                                                                  adminName
+                                                            }
+                                                      />
+                                                </>
+                                          )}
+                                    />
+                                    <Route
+                                          path="/newOwner"
+                                          render={(props) => (
+                                                <>
+                                                      <Home
+                                                            adminName={
+                                                                  adminName
+                                                            }
+                                                      />
+                                                </>
+                                          )}
+                                    />
                               </div>
                               <Footer />
                         </div>

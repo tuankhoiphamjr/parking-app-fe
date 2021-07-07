@@ -50,8 +50,10 @@ const getNumOfEvaluate = async () => {
       }
 };
 
-export default {
+const CountApi = {
       getNumOfUser,
       getNumOfParking,
       getNumOfEvaluate,
 };
+
+export default CountApi;
