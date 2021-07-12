@@ -185,7 +185,11 @@ const Parking = ({ parking, acceptParkingButton }) => {
                                                 </span>
                                           </div>
                                           <span className="parkingDetail">
-                                                {parking.description}
+                                                {parking.images.length > 0
+                                                      ? parking.images.map(
+                                                              (i) => "hello"
+                                                        )
+                                                      : ""}
                                           </span>
                                     </li>
                               </ul>

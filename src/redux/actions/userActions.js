@@ -2,7 +2,7 @@ import { SIGNIN_SUCCESS, SIGN_OUT } from "../actionTypes";
 const signInUpSuccess = (user) => {
       return {
             type: SIGNIN_SUCCESS,
-            user,
+            payload: user,
       };
 };
 

@@ -30,12 +30,16 @@
       align-items: flex-start;
 }
 
-.extraInfo{
-      display: none;
+.extraInfo {
+      transition: all 1s ease-out;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
 }
 
-.extraInfo.active{
-      display: flex;
+.extraInfo.active {
+      opacity: 1;
+      height: auto;
 }
 
 .parkingTitleBox {
@@ -52,12 +56,12 @@
       width: 120px;
 }
 
-.parkingPriceByVehicle{
+.parkingPriceByVehicle {
       display: flex;
       justify-content: space-between;
 }
 
-.parkingVehicle{
+.parkingVehicle {
       width: 100px;
 }
 
@@ -81,20 +85,24 @@
       border-radius: 0 0 10px 10px;
 }
 
-.parkingShowMore{
+.parkingShowMore {
       font-size: 14px;
 }
 
 .parkingBottom .moreIcon,
-.parkingBottom.active .lessIcon{
-      display: block !important;
+.parkingBottom.active .lessIcon {
+      opacity: 1;
+      height: auto;
+      transition: all 1s ease-out;
 }
 
 .parkingBottom .lessIcon,
-.parkingBottom.active .moreIcon{
-      display: none !important;
+.parkingBottom.active .moreIcon {
+      transition: all 1s ease-out;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
 }
-
 
 @media only screen and (max-width: 1200px) {
       .parkingRight {
@@ -108,16 +116,16 @@
       .main__container {
             padding: 20px 0;
       }
-      .parkingLeft{
+      .parkingLeft {
             width: 100%;
       }
-      .parkingInfos{
+      .parkingInfos {
             padding-bottom: 20px;
       }
-      .parkingRight{
+      .parkingRight {
             width: 100%;
       }
-      .parkingTop{
+      .parkingTop {
             flex-wrap: wrap;
       }
 }

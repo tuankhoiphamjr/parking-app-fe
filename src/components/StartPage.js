@@ -6,13 +6,10 @@ import userAction from "../redux/actions/userActions";
 
 const StartPage = () => {
       const dispatch = useDispatch();
-      useEffect(() => {
-            getData();
-      }, []);
       const getData = async () => {
             try {
                   const jsonValue = await reactLocalStorage.getObject("admin");
-                  
+
                   if (!jsonValue || JSON.parse(jsonValue) == null) {
                         window.location.href = "/login";
                   } else {
@@ -40,6 +37,10 @@ const StartPage = () => {
                   window.location.href = "/login";
             }
       };
+      useEffect(() => {
+            getData();
+      }, []);
+
       return <div></div>;
 };
 

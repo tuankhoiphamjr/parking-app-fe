@@ -14,6 +14,11 @@ const enhancers = [];
 const store = createStore(
       rootReducer(),
       initialState,
-      compose(applyMiddleware(...middleware), ...enhancers)
+      compose(
+            applyMiddleware(...middleware),
+            ...enhancers,
+            window.__REDUX_DEVTOOLS_EXTENSION__ &&
+                  window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
 );
 export default store;

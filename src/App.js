@@ -12,6 +12,18 @@ import { reactLocalStorage } from "reactjs-localstorage";
 
 function App() {
       const [adminName, setAdminName] = useState("");
+      const checkLoginSuccess = async () => {
+            const jsonValue = await reactLocalStorage.getObject("admin");
+            if (!jsonValue || jsonValue.length === undefined) {
+                  window.location.href = "/login";
+            }
+      };
+      const checkLoginFail = async () => {
+            const jsonValue = await reactLocalStorage.getObject("admin");
+            if (jsonValue || jsonValue.length !== undefined) {
+                  window.location.href = "/home";
+            }
+      };
 
       const setAdminInfo = async () => {
             try {
@@ -45,7 +57,7 @@ function App() {
                                           path="/login"
                                           render={(props) => (
                                                 <>
-                                                      <LogHome />
+                                                      <LogHome checkLoginFail={checkLoginFail} />
                                                 </>
                                           )}
                                     />
@@ -56,6 +68,9 @@ function App() {
                                                       <Home
                                                             adminName={
                                                                   adminName
+                                                            }
+                                                            checkLoginSuccess={
+                                                                  checkLoginSuccess
                                                             }
                                                       />
                                                 </>
@@ -69,6 +84,9 @@ function App() {
                                                             adminName={
                                                                   adminName
                                                             }
+                                                            checkLoginSuccess={
+                                                                  checkLoginSuccess
+                                                            }
                                                       />
                                                 </>
                                           )}
@@ -80,6 +98,9 @@ function App() {
                                                       <Home
                                                             adminName={
                                                                   adminName
+                                                            }
+                                                            checkLoginSuccess={
+                                                                  checkLoginSuccess
                                                             }
                                                       />
                                                 </>

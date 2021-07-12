@@ -1,9 +1,26 @@
 import { Link } from "react-router-dom";
 import "./SideBar.css";
 import logo from "../../assets/avatar/avatar.jfif";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useDispatch } from "react-redux";
+import userAction from "../../redux/actions/userActions";
 
-const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
+const SideBar = ({
+      sideBarOpen,
+      closeSideBar,
+      adminName,
+      checkLoginSuccess,
+}) => {
       let link = document.querySelectorAll(".sidebar__link");
+
+      const dispatch = useDispatch();
+      const handleLogOut = async () => {
+            const logOut = Promise.all([
+                  dispatch(userAction.signOut()),
+                  reactLocalStorage.clear(),
+                  checkLoginSuccess(),
+            ]);
+      };
 
       const handleOnClick = (e) => {
             let j = 0;
@@ -41,6 +58,7 @@ const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
                                     Dashboard
                               </Link>
                         </div>
+                        <hr></hr>
                         <h2>Người dùng</h2>
                         <div className={`sidebar__link `}>
                               <Link
@@ -72,6 +90,7 @@ const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
                                     Tin nhắn
                               </Link>
                         </div>
+                        <hr></hr>
                         <h2>Chủ bãi</h2>
                         <div className={`sidebar__link`}>
                               <Link
@@ -103,10 +122,12 @@ const SideBar = ({ sideBarOpen, closeSideBar, adminName }) => {
                                     Tin nhắn
                               </Link>
                         </div>
+                        <hr></hr>
                         <div className="sidebar__logout">
                               <Link
                                     to="#"
                                     style={{ width: "100%", height: "100%" }}
+                                    onClick={handleLogOut}
                               >
                                     <i className="far fa-power-off"></i>
                                     Đăng xuất

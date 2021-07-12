@@ -4,9 +4,9 @@ import NavBar from "./NavBar/NavBar";
 import SideBar from "./SideBar/SideBar";
 import routes from "./Routes";
 import { useEffect } from "react";
-import { reactLocalStorage } from "reactjs-localstorage";
+// import { reactLocalStorage } from "reactjs-localstorage";
 
-const Home = ({ adminName }) => {
+const Home = ({ adminName, checkLoginSuccess }) => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
       // const [adminName, setAdminName] = useState("");
 
@@ -20,9 +20,9 @@ const Home = ({ adminName }) => {
       //       }
       // };
 
-      // useEffect(() => {
-      //       setAdminInfo();
-      // }, []);
+      useEffect(() => {
+            checkLoginSuccess();
+      }, []);
 
       const openSideBar = () => {
             setSideBarOpen(true);
@@ -60,6 +60,7 @@ const Home = ({ adminName }) => {
                         sideBarOpen={sideBarOpen}
                         closeSideBar={closeSideBar}
                         adminName={adminName}
+                        checkLoginSuccess={checkLoginSuccess}
                   />
             </div>
       );
