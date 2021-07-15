@@ -1,7 +1,7 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
 import { useState, useEffect } from "react";
-import hello from "../../assets/avatar/avatar.jfif";
+// import hello from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
 
@@ -85,7 +85,8 @@ const AdminWrapper = () => {
             <main>
                   <div className="main__container">
                         <div className="main__title">
-                              <img src={hello} alt="hello" />
+                              {/* <img src={hello} alt="hello" /> */}
+                              <img alt="hello" />
                               <div className="main__greeting">
                                     <h1>{adminFullName}</h1>
                                     <p>Chào mừng bạn đã đến với giao diện Quản lý</p>

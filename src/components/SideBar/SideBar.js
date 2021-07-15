@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./SideBar.css";
-import logo from "../../assets/avatar/avatar.jfif";
+// import logo from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useDispatch } from "react-redux";
 import userAction from "../../redux/actions/userActions";
@@ -27,7 +27,6 @@ const SideBar = ({
             while (j < link.length) {
                   link[j++].className = "sidebar__link";
             }
-            console.log(e.target.parentElement);
             e.target.parentElement.className = "sidebar__link active_menu_link";
       };
 
@@ -38,7 +37,8 @@ const SideBar = ({
             >
                   <div className="sidebar__title">
                         <div className="sidebar__img">
-                              <img src={logo} alt="logo" />
+                              {/* <img src={logo} alt="logo" /> */}
+                              <img alt="logo" />
                               <h1>{adminName}</h1>
                         </div>
                         <i
