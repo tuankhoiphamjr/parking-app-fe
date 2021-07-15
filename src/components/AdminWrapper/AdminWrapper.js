@@ -1,16 +1,94 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
+import { useState, useEffect } from "react";
 import hello from "../../assets/avatar/avatar.jfif";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { CountApi } from "../../api";
 
 const AdminWrapper = () => {
+      const [adminFullName, setAdminFullName] = useState("");
+      const [numOfUser, setNumOfUser] = useState();
+      const [numOfOwner, setNumOfOwner] = useState();
+      const [numOfParking, setNumOfParking] = useState();
+      const [numOfEvaluate, setNumOfEvaluate] = useState();
+
+      const getAdminInfo = async () => {
+            try {
+                  const jsonValue = await reactLocalStorage.getObject("admin");
+                  setAdminFullName(
+                        `${JSON.parse(jsonValue).result.firstName} ${
+                              JSON.parse(jsonValue).result.lastName
+                        }`
+                  );
+            } catch (error) {
+                  console.log("Err when get token from local storage");
+                  return false;
+            }
+      };
+
+      const getCountUser = async () => {
+            try {
+                  let response = await CountApi.getNumOfUser();
+                  if (response?.status) {
+                        try {
+                              setNumOfUser(response.data.numOfUser);
+                              setNumOfOwner(response.data.numOfOwner);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const getCountParking = async () => {
+            try {
+                  let response = await CountApi.getNumOfParking();
+                  if (response?.status) {
+                        try {
+                              setNumOfParking(response.data.numOfParking);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const getCountEvaluate = async () => {
+            try {
+                  let response = await CountApi.getNumOfEvaluate();
+                  if (response?.status) {
+                        try {
+                              setNumOfEvaluate(response.data.numOfEvaluate);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      useEffect(() => {
+            getAdminInfo();
+            getCountUser();
+            getCountParking();
+            getCountEvaluate();
+      }, []);
       return (
             <main>
                   <div className="main__container">
                         <div className="main__title">
                               <img src={hello} alt="hello" />
                               <div className="main__greeting">
-                                    <h1>Admin</h1>
-                                    <p>Welcome to admin dashboard</p>
+                                    <h1>{adminFullName}</h1>
+                                    <p>Chào mừng bạn đã đến với giao diện Quản lý</p>
                               </div>
                         </div>
 
@@ -19,10 +97,10 @@ const AdminWrapper = () => {
                                     <i className="fas fa-users fa-2x text-lightblue"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of user
+                                                Số lượng người dùng
                                           </p>
                                           <span className="font-bold text-title">
-                                                57,238
+                                                {numOfUser}
                                           </span>
                                     </div>
                               </div>
@@ -30,10 +108,10 @@ const AdminWrapper = () => {
                                     <i className="fas fa-user-tie fa-2x text-red"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of Owner
+                                                Số lượng chủ bãi
                                           </p>
                                           <span className="font-bold text-title">
-                                                2467
+                                                {numOfOwner}
                                           </span>
                                     </div>
                               </div>
@@ -41,10 +119,10 @@ const AdminWrapper = () => {
                                     <i className="fas fa-parking fa-2x text-yellow"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                Number of Parking
+                                                Số lượng bãi xe
                                           </p>
                                           <span className="font-bold text-title">
-                                                340
+                                                {numOfParking}
                                           </span>
                                     </div>
                               </div>
@@ -52,10 +130,10 @@ const AdminWrapper = () => {
                                     <i className="fa fa-thumbs-up fa-2x text-green"></i>
                                     <div className="card__inner">
                                           <p className="text-primary-p">
-                                                New Owner
+                                                Số lượng đánh giá
                                           </p>
                                           <span className="font-bold text-title">
-                                                645
+                                                {numOfEvaluate}
                                           </span>
                                     </div>
                               </div>
@@ -71,7 +149,7 @@ const AdminWrapper = () => {
                                     </div>
                                     <Chart />
                               </div>
-                              {/* <div className="charts__right">
+                              <div className="charts__right">
                                     <div className="charts__right__title">
                                           <div>
                                                 <h1>Stats reports</h1>
@@ -97,7 +175,7 @@ const AdminWrapper = () => {
                                                 <p>$7501</p>
                                           </div>
                                     </div>
-                              </div> */}
+                              </div>
                         </div>
                   </div>
             </main>

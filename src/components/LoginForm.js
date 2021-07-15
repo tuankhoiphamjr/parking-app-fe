@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { LogInApi } from "../api";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useDispatch } from "react-redux";
+import userAction from "../redux/actions/userActions";
 
 const LoginForm = () => {
       const [username, setUsername] = useState("");
       const [password, setPassword] = useState("");
+      const dispatch = useDispatch();
+
       const login = async (e) => {
             e.preventDefault();
             if (username === "") {
@@ -16,6 +21,18 @@ const LoginForm = () => {
                   };
                   let response = await LogInApi.login(data);
                   if (response?.status) {
+                        try {
+                              await reactLocalStorage.setObject(
+                                    "admin",
+                                    JSON.stringify({
+                                          ...response.data,
+                                          password: password,
+                                    })
+                              );
+                        } catch (error) {
+                              console.log(error);
+                        }
+                        dispatch(userAction.signInUpSuccess(response.data));
                         window.location.href = "/home";
                   } else {
                         alert("Đăng nhập thất bại");

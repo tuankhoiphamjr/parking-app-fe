@@ -1,18 +1,18 @@
 import React from "react";
-import Home from "./AdminWrapper/AdminWrapper"
-import Notifycation from "./Notifycation/Notifycation";
+import AdminWrapper from "./AdminWrapper/AdminWrapper";
+import Notification from "./Notification/Notification";
 import NewOwner from "./NewOwner/NewOwner";
 
 const Routes = [
       {
-            path : '/home',
-            exact : false,
-            main : () => <Home />
-        },
+            path: "/home",
+            exact: false,
+            main: () => <AdminWrapper />,
+      },
       {
             path: "/notify",
             exact: false,
-            main: () => <Notifycation />,
+            main: () => <Notification />,
       },
       {
             path: "/newOwner",

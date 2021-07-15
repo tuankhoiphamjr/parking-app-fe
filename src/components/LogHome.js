@@ -1,7 +1,10 @@
-import React from "react";
+import { useEffect } from "react";
 import LoginForm from "./LoginForm";
 
-const LogHome = () => {
+const LogHome = ({ checkLoginFail }) => {
+      useEffect(() => {
+            checkLoginFail();
+      }, []);
       return (
             <div className="wrapper fadeInDown">
                   <div id="formContent">
