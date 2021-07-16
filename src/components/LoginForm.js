@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { LogInApi } from "../api";
 import { reactLocalStorage } from "reactjs-localstorage";

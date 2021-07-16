@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -21,7 +20,7 @@ function App() {
       };
       const checkLoginFail = async () => {
             const jsonValue = await reactLocalStorage.getObject("admin");
-            if (jsonValue.length !== undefined) {
+            if (jsonValue || jsonValue.length !== undefined) {
                   window.location.href = "/home";
             }
       };

@@ -1,11 +1,9 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
 import { useState, useEffect } from "react";
-import hello from "../../assets/avatar/avatar.png";
+import hello from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
-import React from "react";
-
 
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");

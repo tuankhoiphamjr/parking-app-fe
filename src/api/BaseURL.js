@@ -1,1 +1,1 @@
-export const BaseURL = 'http://parking-app-bk.herokuapp.com/api'
+export const BaseURL = 'http://192.168.19.105:8080/api'

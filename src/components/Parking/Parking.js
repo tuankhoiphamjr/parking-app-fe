@@ -1,4 +1,3 @@
-import React from "react";
 import "./Parking.css";
 import { dateTimeFormat } from "../../api";
 import {

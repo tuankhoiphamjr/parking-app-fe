@@ -1,6 +1,4 @@
 import "../../../node_modules/react-vis/dist/style.css";
-import React from "react";
-
 import {
       XYPlot,
       LineSeries,
