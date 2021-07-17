@@ -27,7 +27,6 @@ const SideBar = ({
             while (j < link.length) {
                   link[j++].className = "sidebar__link";
             }
-            console.log(e.target.parentElement);
             e.target.parentElement.className = "sidebar__link active_menu_link";
       };
 

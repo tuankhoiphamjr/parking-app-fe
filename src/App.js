@@ -12,6 +12,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 
 function App() {
       const [adminName, setAdminName] = useState("");
+
       const checkLoginSuccess = async () => {
             const jsonValue = await reactLocalStorage.getObject("admin");
             if (!jsonValue || jsonValue.length === undefined) {
@@ -57,7 +58,11 @@ function App() {
                                           path="/login"
                                           render={(props) => (
                                                 <>
-                                                      <LogHome checkLoginFail={checkLoginFail} />
+                                                      <LogHome
+                                                            checkLoginFail={
+                                                                  checkLoginFail
+                                                            }
+                                                      />
                                                 </>
                                           )}
                                     />
