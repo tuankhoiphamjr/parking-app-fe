@@ -78,10 +78,13 @@ const AdminWrapper = () => {
       };
 
       useEffect(() => {
-            getAdminInfo();
-            getCountUser();
-            getCountParking();
-            getCountEvaluate();
+            const fetchData = async () => {
+                  await getAdminInfo();
+                  await getCountUser();
+                  await getCountParking();
+                  await getCountEvaluate();
+            }
+            fetchData();
       }, []);
       return (
             <main>
