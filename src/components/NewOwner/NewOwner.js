@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NewOwnerApi } from "../../api";
 import Parkings from "../Parkings/Parkings";
 import "./NewOwner.css";
+import React from "react";
 
 const NewOwner = () => {
       const [listParking, setListParking] = useState([]);

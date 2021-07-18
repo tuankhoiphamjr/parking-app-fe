@@ -1,4 +1,5 @@
 import Parking from "../Parking/Parking";
+import React from "react";
 
 const Parkings = ({listParking, acceptParkingButton}) => {
       return (
