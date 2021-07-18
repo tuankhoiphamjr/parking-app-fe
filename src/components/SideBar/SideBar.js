@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import "./SideBar.css";
-import logo from "../../assets/avatar/avatar.png";
+import logo from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useDispatch } from "react-redux";
 import userAction from "../../redux/actions/userActions";
-import React from "react";
 
 const SideBar = ({
       sideBarOpen,

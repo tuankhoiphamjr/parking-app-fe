@@ -1,38 +1,47 @@
 import "../../../node_modules/react-vis/dist/style.css";
-import React from "react";
-
 import {
       XYPlot,
       LineSeries,
+      LineMarkSeries,
       XAxis,
       YAxis,
       VerticalGridLines,
       HorizontalGridLines,
+      DiscreteColorLegend,
 } from "react-vis";
+import { useWindowDimensions } from "../../api";
 
-const Chart = () => {
-      const data = [
-            { x: 0, y: 8 },
-            { x: 1, y: 5 },
-            { x: 2, y: 9 },
-            { x: 3, y: 1 },
-            { x: 4, y: 3 },
-            { x: 5, y: 7 },
-            { x: 6, y: 2 },
-            { x: 7, y: 4 },
-            { x: 8, y: 0 },
-            { x: 9, y: 6 },
+const Chart = ({ userStatistical }) => {
+      const { height, width } = useWindowDimensions();
+      // console.log({ height, width });
+      const series = [2, 1].map((i) =>
+            userStatistical.map((d) => ({ x: d[0], y: d[i] }))
+      );
+      const axisProps = {
+            tickSizeInner: 0,
+            style: { line: { stroke: "#939393", strokeWidth: "1px" } },
+      };
+      const color = ["#469cac", "#cc3d38"];
+      const items = [
+            { title: "Người dùng", color: "#469cac", strokeWidth: 6 },
+            { title: "Chủ bãi", color: "#cc3d38", strokeWidth: 6 },
       ];
       return (
             <div style={{ marginTop: "15px" }}>
-                  <XYPlot height={300} width={300}>
+                  <DiscreteColorLegend items={items} orientation="horizontal" />
+                  <XYPlot height={300} width={600}>
                         <VerticalGridLines />
                         <HorizontalGridLines />
-                        <XAxis />
-                        <YAxis />
-                        <LineSeries data={data} color="red" />
-                        <LineSeries data={data} color="purple" />
-                        <LineSeries data={data} color="yellow" />
+                        <XAxis {...axisProps} tickFormat={String} />
+                        <YAxis {...axisProps} tickFormat={String} />
+                        {series.map((d, i) => (
+                              <LineMarkSeries
+                                    key={i}
+                                    size={3}
+                                    data={d}
+                                    color={color[i]}
+                              />
+                        ))}
                   </XYPlot>
             </div>
       );

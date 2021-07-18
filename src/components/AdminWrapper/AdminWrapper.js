@@ -1,11 +1,9 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
 import { useState, useEffect } from "react";
-import hello from "../../assets/avatar/avatar.png";
+import hello from "../../assets/avatar/avatar.jfif";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
-import React from "react";
-
 
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");
@@ -13,6 +11,18 @@ const AdminWrapper = () => {
       const [numOfOwner, setNumOfOwner] = useState();
       const [numOfParking, setNumOfParking] = useState();
       const [numOfEvaluate, setNumOfEvaluate] = useState();
+      // and this
+      const [userStatistical, setUserStatistical] = useState([]);
+      const getUserStatisticalInCurrentMonth = async () => {
+            let date = new Date();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getUserStatistical(month, year);
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setUserStatistical(response.data.result);
+      };
 
       const getAdminInfo = async () => {
             try {
@@ -78,10 +88,20 @@ const AdminWrapper = () => {
       };
 
       useEffect(() => {
+            // const data = async () => {
+            //       Promise.all([
+            //             getAdminInfo(),
+            //             getCountUser(),
+            //             getCountParking(),
+            //             getCountEvaluate(),
+            //       ]);
+            // };
+            // data();
             getAdminInfo();
             getCountUser();
             getCountParking();
             getCountEvaluate();
+            getUserStatisticalInCurrentMonth();
       }, []);
       return (
             <main>
@@ -91,7 +111,10 @@ const AdminWrapper = () => {
                               <img alt="hello" />
                               <div className="main__greeting">
                                     <h1>{adminFullName}</h1>
-                                    <p>Chào mừng bạn đã đến với giao diện Quản lý</p>
+                                    <p>
+                                          Chào mừng bạn đã đến với giao diện
+                                          Quản lý
+                                    </p>
                               </div>
                         </div>
 
@@ -145,12 +168,19 @@ const AdminWrapper = () => {
                               <div className="charts__left">
                                     <div className="charts__left__title">
                                           <div>
-                                                <h1>Daily reports</h1>
-                                                <p>Vietnam</p>
+                                                <h1>Báo cáo hằng tháng</h1>
+                                                <p>Số người dùng mới</p>
                                           </div>
-                                          <i className="fa fa-usd"></i>
                                     </div>
-                                    <Chart />
+                                    {userStatistical.length > 0 ? (
+                                          <Chart
+                                                userStatistical={
+                                                      userStatistical
+                                                }
+                                          />
+                                    ) : (
+                                          <></>
+                                    )}
                               </div>
                               <div className="charts__right">
                                     <div className="charts__right__title">
