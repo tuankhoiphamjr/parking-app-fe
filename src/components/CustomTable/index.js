@@ -3,32 +3,24 @@ import { makeData, Logo, Tips } from "./Utils";
 import { matchSorter } from "match-sorter";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { UserApi } from "../../api";
 
 // Import React Table
 import ReactTable from "react-table-v6";
 import "react-table-v6/react-table.css";
 
 const CustomTable = () => {
-  const getData = async () => {
-    let res = await axios.get(`http://192.168.192.1:8080/api/user`, {
-      headers: {
-        "x-access-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTE1ZGQxZTRiZGM1MmIwNDk4OTUyZCIsImlhdCI6MTYyNjU4NDQ4OSwiZXhwIjoxNjU4MTIwNDg5fQ.0dI3abE6TLKc5-shzxT0h296p6_czISMXnfJ8L42iy0",
-      },
-    });
-    return res.data;
-  };
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      let data = await getData();
+      let data = await await UserApi.getAllUserInfo();
+      console.log(data)
       data = data.filter((element) => element.role !== "admin");
       setData(data);
     };
 
     fetchData();
 
-    console.log("1231213")
   }, []);
   return (
     <div>
@@ -114,14 +106,16 @@ const CustomTable = () => {
                 id: "button",
                 Cell: (props) => {
                   return (
-                    <div style={{textAlign: "center"}}>
+                    <div style={{ textAlign: "center" }}>
                       <Link
                         to={{
                           pathname: `/users/${props.original._id}`,
                           data: props.original,
                         }}
                       >
-                        <button onClick={(e) => console.log(123)}>View / Edit</button>
+                        <button onClick={(e) => console.log(123)}>
+                          View / Edit
+                        </button>
                       </Link>
                     </div>
                   );

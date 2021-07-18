@@ -1,17 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { UserApi } from "../../api";
 import { Button } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 const UserInfo = ({ props }) => {
   const [data, setData] = useState(null);
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
-
+  const [alertMSG, setAlertMSG] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertType, setAlertType] = useState("success");
   const handleBackButton = () => {
     props.history.push("/users");
   };
 
+  const onSubmit = async () => {
+    if (password.length < 6 || rePassword.length < 6) {
+      setAlertMSG("Mật khẩu phải có ít nhất 6 kí tự");
+      setShowAlert(true);
+      setAlertType("error");
+    } else if (password !== rePassword) {
+      setAlertMSG("Mật khẩu mới không trùng nhau");
+      setShowAlert(true);
+      setAlertType("error");
+    } else {
+      let pathnameArraySplit = props.location.pathname.split("/");
+      let id = pathnameArraySplit[pathnameArraySplit.length - 1];
+
+      await UserApi.updateNewPassword(id, password);
+      setAlertMSG("Đổi mật khẩu thành công");
+      setShowAlert(true);
+      setAlertType("success")
+      setPassword("");
+      setRePassword("");
+    }
+  };
+
   const onChangeInput = (event, cb) => {
+    setShowAlert(false);
     cb(event.target.value);
   };
 
@@ -30,10 +56,6 @@ const UserInfo = ({ props }) => {
     }
     console.log(props);
   }, []);
-
-  useEffect(() => {
-    console.log(rePassword);
-  }, [password, rePassword]);
   return (
     <div>
       <button onClick={() => handleBackButton()}>back</button>
@@ -89,10 +111,21 @@ const UserInfo = ({ props }) => {
               value={rePassword}
             />
           </label>
-          <Button variant="contained" color="primary">
+          <Button onClick={onSubmit} variant="contained" color="primary">
             Submit
           </Button>
         </form>
+      )}
+      {showAlert && (
+        <Alert
+          onClose={() => {
+            setShowAlert(false);
+          }}
+          variant="filled"
+          severity={alertType}
+        >
+          {alertMSG}
+        </Alert>
       )}
     </div>
   );
