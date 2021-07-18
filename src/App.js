@@ -21,7 +21,7 @@ function App() {
       };
       const checkLoginFail = async () => {
             const jsonValue = await reactLocalStorage.getObject("admin");
-            if (jsonValue || jsonValue.length !== undefined) {
+            if (jsonValue.length !== undefined) {
                   window.location.href = "/home";
             }
       };

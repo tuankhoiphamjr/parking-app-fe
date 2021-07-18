@@ -13,7 +13,7 @@ import { useWindowDimensions } from "../../api";
 
 const Chart = ({ userStatistical }) => {
       const { height, width } = useWindowDimensions();
-      console.log({ height, width });
+      // console.log({ height, width });
       const series = [2, 1].map((i) =>
             userStatistical.map((d) => ({ x: d[0], y: d[i] }))
       );
