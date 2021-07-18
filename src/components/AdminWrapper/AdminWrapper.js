@@ -87,7 +87,8 @@ const AdminWrapper = () => {
             <main>
                   <div className="main__container">
                         <div className="main__title">
-                              <img src={hello} alt="hello" />
+                              {/* <img src={hello} alt="hello" /> */}
+                              <img alt="hello" />
                               <div className="main__greeting">
                                     <h1>{adminFullName}</h1>
                                     <p>Chào mừng bạn đã đến với giao diện Quản lý</p>

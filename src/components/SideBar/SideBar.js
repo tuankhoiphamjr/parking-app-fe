@@ -28,7 +28,6 @@ const SideBar = ({
             while (j < link.length) {
                   link[j++].className = "sidebar__link";
             }
-            console.log(e.target.parentElement);
             e.target.parentElement.className = "sidebar__link active_menu_link";
       };
 
@@ -39,7 +38,8 @@ const SideBar = ({
             >
                   <div className="sidebar__title">
                         <div className="sidebar__img">
-                              <img src={logo} alt="logo" />
+                              {/* <img src={logo} alt="logo" /> */}
+                              <img alt="logo" />
                               <h1>{adminName}</h1>
                         </div>
                         <i
