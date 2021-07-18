@@ -37,7 +37,8 @@ const SideBar = ({
             >
                   <div className="sidebar__title">
                         <div className="sidebar__img">
-                              <img src={logo} alt="logo" />
+                              {/* <img src={logo} alt="logo" /> */}
+                              <img alt="logo" />
                               <h1>{adminName}</h1>
                         </div>
                         <i
