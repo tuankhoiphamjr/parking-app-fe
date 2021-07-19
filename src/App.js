@@ -112,6 +112,23 @@ function App() {
                                                 </>
                                           )}
                                     />
+                                    <Route
+                                          path="/users"
+                                          render={(props) => (
+                                                <>
+                                                <Home
+                                                      props={props}
+                                                      adminName={
+                                                            adminName
+                                                      }
+                                                      checkLoginSuccess={
+                                                            checkLoginSuccess
+                                                      }
+                                                />
+                                          </>
+                                          )}
+                                          exact={false}
+                                    />
                               </div>
                               <Footer />
                         </div>

@@ -6,7 +6,6 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
 import React from "react";
 
-
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");
       const [numOfUser, setNumOfUser] = useState();
@@ -90,20 +89,14 @@ const AdminWrapper = () => {
       };
 
       useEffect(() => {
-            // const data = async () => {
-            //       Promise.all([
-            //             getAdminInfo(),
-            //             getCountUser(),
-            //             getCountParking(),
-            //             getCountEvaluate(),
-            //       ]);
-            // };
-            // data();
-            getAdminInfo();
-            getCountUser();
-            getCountParking();
-            getCountEvaluate();
-            getUserStatisticalInCurrentMonth();
+            const fetchData = async () => {
+                  await getAdminInfo();
+                  await getCountUser();
+                  await getCountParking();
+                  await getCountEvaluate();
+                  await getUserStatisticalInCurrentMonth();
+            };
+            fetchData();
       }, []);
       return (
             <main>

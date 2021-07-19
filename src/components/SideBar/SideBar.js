@@ -63,7 +63,7 @@ const SideBar = ({
                         <h2>Người dùng</h2>
                         <div className={`sidebar__link `}>
                               <Link
-                                    to="/home"
+                                    to="/users"
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
