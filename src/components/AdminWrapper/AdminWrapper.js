@@ -187,10 +187,10 @@ const AdminWrapper = () => {
                               <div className="charts__right">
                                     <div className="charts__right__title">
                                           <div>
-                                                <h1>Stats reports</h1>
-                                                <p>Vietnam</p>
+                                                <h1>Báo cáo hằng ngày</h1>
+                                                {/* <p>Vietnam</p> */}
                                           </div>
-                                          <i className="fa fa-usd"></i>
+                                          {/* <i className="fa fa-usd"></i> */}
                                     </div>
                                     <div className="charts__right__cards">
                                           <div className="card1">
