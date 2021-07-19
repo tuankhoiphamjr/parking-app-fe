@@ -1,0 +1,43 @@
+.avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+}
+
+.userInfoDetail {
+      margin: 10px 10px;
+      border-radius: 10px;
+      background-color: #fff;
+      -webkit-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.37);
+      box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.37);
+}
+
+.formDetail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: space-between;
+      padding: 10px 10px;
+}
+
+.userDetail {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 10px 0;
+}
+
+.userDetailTitle {
+      width: 180px;
+}
+
+.formButton{
+      display: flex;
+      justify-content: center;
+}
+
+@media only screen and (max-width: 568px) {
+      .formDetail {
+            grid-template-columns: 1fr;
+      }
+}

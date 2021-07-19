@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { UserApi } from "../../api";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import "./UserInfo.css";
 
 const UserInfo = ({ props }) => {
       const [data, setData] = useState(null);
@@ -56,101 +57,150 @@ const UserInfo = ({ props }) => {
             }
       }, []);
       return (
-            <div>
-                  <button onClick={() => handleBackButton()}>back</button>
-                  {data && (
-                        <form>
-                              <label>
-                                    Ảnh đại diện:
-                                    <img src={data.avatar} width={200} />
-                              </label>
-                              <label>
-                                    Họ:
-                                    <input
-                                          disabled
-                                          type="text"
-                                          name="lastName"
-                                          value={data.lastName}
-                                    />
-                              </label>
-                              <label>
-                                    Tên:
-                                    <input
-                                          disabled
-                                          type="text"
-                                          name="firstName"
-                                          value={data.firstName}
-                                    />
-                              </label>
-                              <label>
-                                    Email:
-                                    <input
-                                          disabled
-                                          type="email"
-                                          name="email"
-                                          value={data.email}
-                                    />
-                              </label>
-                              <label>
-                                    Số điện thoại:
-                                    <input
-                                          disabled
-                                          type="text"
-                                          name="phoneNumber"
-                                          value={data.phoneNumber}
-                                    />
-                              </label>
-
-                              <label>
-                                    Mật khẩu mới:
-                                    <input
-                                          type="password"
-                                          name="password"
-                                          onChange={(event) =>
-                                                onChangeInput(
-                                                      event,
-                                                      setPassword
-                                                )
-                                          }
-                                          value={password}
-                                    />
-                              </label>
-
-                              <label>
-                                    Nhập lại mật khẩu mới:
-                                    <input
-                                          type="password"
-                                          name="re-password"
-                                          onChange={(event) =>
-                                                onChangeInput(
-                                                      event,
-                                                      setRePassword
-                                                )
-                                          }
-                                          value={rePassword}
-                                    />
-                              </label>
-                              <Button
-                                    onClick={onSubmit}
-                                    variant="contained"
-                                    color="primary"
-                              >
-                                    Submit
-                              </Button>
-                        </form>
-                  )}
-                  {showAlert && (
-                        <Alert
-                              onClose={() => {
-                                    setShowAlert(false);
-                              }}
-                              variant="filled"
-                              severity={alertType}
+            <main>
+                  <div className="main__container">
+                        <Button
+                              onClick={() => handleBackButton()}
+                              variant="contained"
+                              color="secondary"
                         >
-                              {alertMSG}
-                        </Alert>
-                  )}
-            </div>
+                              back
+                        </Button>
+                        {data && (
+                              <form className="userInfoDetail">
+                                    <ul className="formDetail">
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Ảnh đại diện:
+                                                </span>
+
+                                                <img
+                                                      src={data.avatar}
+                                                      className="avatar"
+                                                />
+                                          </li>
+                                          <li className="userDetail"></li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Họ:
+                                                </span>
+                                                <TextField
+                                                      disabled
+                                                      type="text"
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Disabled"
+                                                      size="small"
+                                                      value={data.lastName}
+                                                />
+                                          </li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Tên:
+                                                </span>
+                                                <TextField
+                                                      disabled
+                                                      type="text"
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Disabled"
+                                                      size="small"
+                                                      value={data.firstName}
+                                                />
+                                          </li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Email:
+                                                </span>
+                                                <TextField
+                                                      disabled
+                                                      type="text"
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Disabled"
+                                                      size="small"
+                                                      value={data.email}
+                                                />
+                                          </li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Số điện thoại:
+                                                </span>
+                                                <TextField
+                                                      disabled
+                                                      type="text"
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Disabled"
+                                                      size="small"
+                                                      value={data.phoneNumber}
+                                                />
+                                          </li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Mật khẩu mới:
+                                                </span>
+                                                <TextField
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Mật khẩu"
+                                                      size="small"
+                                                      type="password"
+                                                      name="password"
+                                                      onChange={(event) =>
+                                                            onChangeInput(
+                                                                  event,
+                                                                  setPassword
+                                                            )
+                                                      }
+                                                      value={password}
+                                                />
+                                          </li>
+                                          <li className="userDetail">
+                                                <span className="userDetailTitle">
+                                                      Nhập lại mật khẩu mới:
+                                                </span>
+                                                <TextField
+                                                      variant="outlined"
+                                                      name="lastName"
+                                                      label="Mật khẩu mới"
+                                                      size="small"
+                                                      type="password"
+                                                      name="re-password"
+                                                      onChange={(event) =>
+                                                            onChangeInput(
+                                                                  event,
+                                                                  setRePassword
+                                                            )
+                                                      }
+                                                      value={rePassword}
+                                                />
+                                          </li>
+                                    </ul>
+                                    <div className="formButton">
+                                          <Button
+                                                onClick={onSubmit}
+                                                variant="contained"
+                                                color="primary"
+                                          >
+                                                Submit
+                                          </Button>
+                                    </div>
+                              </form>
+                        )}
+                        {showAlert && (
+                              <Alert
+                                    onClose={() => {
+                                          setShowAlert(false);
+                                    }}
+                                    variant="filled"
+                                    severity={alertType}
+                              >
+                                    {alertMSG}
+                              </Alert>
+                        )}
+                  </div>
+            </main>
       );
 };
 

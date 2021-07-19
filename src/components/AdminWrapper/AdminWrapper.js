@@ -226,15 +226,15 @@ const AdminWrapper = () => {
                                     <div className="charts__right__cards">
                                           <div className="card1">
                                                 <h1>booking</h1>
-                                                <p>{numOfBooking}</p>
+                                                <p>{numOfBooking} lượt</p>
                                           </div>
                                           <div className="card2">
                                                 <h1>doanh thu</h1>
-                                                <p>{revenue}</p>
+                                                <p>{revenue} VND</p>
                                           </div>
                                           <div className="card3">
                                                 <h1>đánh giá</h1>
-                                                <p>{evaluateInDay}</p>
+                                                <p>{evaluateInDay} lượt</p>
                                           </div>
                                           {/* <div className="card4">
                                                 <h1>Orders</h1>

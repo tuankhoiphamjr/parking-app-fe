@@ -220,13 +220,6 @@ const CustomTable = () => {
                                                                               }}
                                                                         >
                                                                               <Button
-                                                                                    onClick={(
-                                                                                          e
-                                                                                    ) =>
-                                                                                          console.log(
-                                                                                                123
-                                                                                          )
-                                                                                    }
                                                                                     variant="contained"
                                                                                     color="primary"
                                                                                     size="small"

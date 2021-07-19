@@ -31,7 +31,7 @@ const Chart = ({ userStatistical }) => {
       return (
             <div style={{ marginTop: "15px" }}>
                   <DiscreteColorLegend items={items} orientation="horizontal" />
-                  <XYPlot height={300} width={600}>
+                  <XYPlot height={300} width={500}>
                         <VerticalGridLines />
                         <HorizontalGridLines />
                         <XAxis {...axisProps} tickFormat={String} />
