@@ -53,7 +53,6 @@ const getNumOfEvaluate = async () => {
 const getUserStatistical = async (month, year) => {
       try {
             const token = await getToken();
-            month = 5;
             const url = `${BaseURL}/adminParking/getUserStatistical/${month}&${year}`;
             const headers = {
                   headers: {
@@ -70,7 +69,6 @@ const getUserStatistical = async (month, year) => {
 const getBookingStatistical = async (day, month, year) => {
       try {
             const token = await getToken();
-            month = 5;
             const url = `${BaseURL}/adminParking/getNumberBookingStatisticalByDate/${day}&${month}&${year}`;
             const headers = {
                   headers: {
@@ -87,7 +85,6 @@ const getBookingStatistical = async (day, month, year) => {
 const getEvaluateStatistical = async (day, month, year) => {
       try {
             const token = await getToken();
-            month = 5;
             const url = `${BaseURL}/adminParking/getNumberEvaluateStatisticalByDate/${day}&${month}&${year}`;
             const headers = {
                   headers: {
