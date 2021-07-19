@@ -16,11 +16,14 @@ const SideBar = ({
 
       const dispatch = useDispatch();
       const handleLogOut = async () => {
-            const logOut = Promise.all([
-                  dispatch(userAction.signOut()),
-                  reactLocalStorage.clear(),
-                  checkLoginSuccess(),
-            ]);
+            // const logOut = Promise.all([
+            //       dispatch(userAction.signOut()),
+            //       reactLocalStorage.clear(),
+            //       checkLoginSuccess(),
+            // ]);
+            await dispatch(userAction.signOut());
+            await reactLocalStorage.clear();
+            await checkLoginSuccess();
       };
 
       const handleOnClick = (e) => {

@@ -12,8 +12,11 @@ const AdminWrapper = () => {
       const [numOfOwner, setNumOfOwner] = useState();
       const [numOfParking, setNumOfParking] = useState();
       const [numOfEvaluate, setNumOfEvaluate] = useState();
-      // and this
       const [userStatistical, setUserStatistical] = useState([]);
+      const [numOfBooking, setNumOfBooking] = useState();
+      const [revenue, setRevenue] = useState();
+      const [evaluateInDay, setEvaluateInDay] = useState();
+
       const getUserStatisticalInCurrentMonth = async () => {
             let date = new Date();
             let month = date.getMonth() + 1;
@@ -23,6 +26,39 @@ const AdminWrapper = () => {
                   console.log("Some thing wrong");
             }
             setUserStatistical(response.data.result);
+      };
+
+      const getBookingStatisticalInCurrentDate = async () => {
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getBookingStatistical(
+                  day,
+                  month,
+                  year
+            );
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setNumOfBooking(response.data.result.numOfBooking);
+            setRevenue(response.data.result.revenue);
+      };
+
+      const getNumOfEvaluateInCurrentDate = async () => {
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getEvaluateStatistical(
+                  day,
+                  month,
+                  year
+            );
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setEvaluateInDay(response.data.result);
       };
 
       const getAdminInfo = async () => {
@@ -95,6 +131,8 @@ const AdminWrapper = () => {
                   await getCountParking();
                   await getCountEvaluate();
                   await getUserStatisticalInCurrentMonth();
+                  await getBookingStatisticalInCurrentDate();
+                  await getNumOfEvaluateInCurrentDate();
             };
             fetchData();
       }, []);
@@ -187,21 +225,21 @@ const AdminWrapper = () => {
                                     </div>
                                     <div className="charts__right__cards">
                                           <div className="card1">
-                                                <h1>Income</h1>
-                                                <p>$75,300</p>
+                                                <h1>booking</h1>
+                                                <p>{numOfBooking}</p>
                                           </div>
                                           <div className="card2">
-                                                <h1>Sales</h1>
-                                                <p>$124,300</p>
+                                                <h1>doanh thu</h1>
+                                                <p>{revenue}</p>
                                           </div>
                                           <div className="card3">
-                                                <h1>Users</h1>
-                                                <p>$45,300</p>
+                                                <h1>đánh giá</h1>
+                                                <p>{evaluateInDay}</p>
                                           </div>
-                                          <div className="card4">
+                                          {/* <div className="card4">
                                                 <h1>Orders</h1>
                                                 <p>$7501</p>
-                                          </div>
+                                          </div> */}
                                     </div>
                               </div>
                         </div>

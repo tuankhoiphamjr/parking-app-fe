@@ -116,18 +116,18 @@ function App() {
                                           path="/users"
                                           render={(props) => (
                                                 <>
-                                                <Home
-                                                      props={props}
-                                                      adminName={
-                                                            adminName
-                                                      }
-                                                      checkLoginSuccess={
-                                                            checkLoginSuccess
-                                                      }
-                                                />
-                                          </>
+                                                      <Home
+                                                            props={props}
+                                                            adminName={
+                                                                  adminName
+                                                            }
+                                                            checkLoginSuccess={
+                                                                  checkLoginSuccess
+                                                            }
+                                                      />
+                                                </>
                                           )}
-                                          exact={false}
+                                          exact={true}
                                     />
                               </div>
                               <Footer />
