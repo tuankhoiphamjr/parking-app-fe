@@ -30,7 +30,6 @@ const NewOwner = () => {
                         parkingId,
                         data
                   );
-                  console.log(response);
                   if (response?.status) {
                         try {
                               let result = await getListParking();
@@ -48,12 +47,15 @@ const NewOwner = () => {
       };
 
       useEffect(() => {
-            getListParking();
+            const fetchData = async () => {
+                  await getListParking();
+            };
+            fetchData();
       }, []);
       return (
             <main>
                   <div className="main__container">
-                        <div className="newOwnerTitle">
+                        <div className="main-container-title">
                               <h1>Quản lý bãi xe mới</h1>
                         </div>
                         <div className="parkingListWrapper">

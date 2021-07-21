@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./SideBar.css";
-import logo from "../../assets/avatar/avatar.png";
+import logo from "../../assets/avatar/images.png";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useDispatch } from "react-redux";
 import userAction from "../../redux/actions/userActions";
@@ -16,11 +16,14 @@ const SideBar = ({
 
       const dispatch = useDispatch();
       const handleLogOut = async () => {
-            const logOut = Promise.all([
-                  dispatch(userAction.signOut()),
-                  reactLocalStorage.clear(),
-                  checkLoginSuccess(),
-            ]);
+            // const logOut = Promise.all([
+            //       dispatch(userAction.signOut()),
+            //       reactLocalStorage.clear(),
+            //       checkLoginSuccess(),
+            // ]);
+            await dispatch(userAction.signOut());
+            await reactLocalStorage.clear();
+            await checkLoginSuccess();
       };
 
       const handleOnClick = (e) => {
@@ -38,8 +41,7 @@ const SideBar = ({
             >
                   <div className="sidebar__title">
                         <div className="sidebar__img">
-                              {/* <img src={logo} alt="logo" /> */}
-                              <img alt="logo" />
+                              <img src={logo} alt="logo" />
                               <h1>{adminName}</h1>
                         </div>
                         <i
