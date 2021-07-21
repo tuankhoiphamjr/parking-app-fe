@@ -1,18 +1,66 @@
 import "./AdminWrapper.css";
 import Chart from "../Charts/Chart";
 import { useState, useEffect } from "react";
-import hello from "../../assets/avatar/avatar.png";
+import hello from "../../assets/avatar/images.png";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
 import React from "react";
 
-
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");
+      const [adminAvatar, setAdminAvatar] = useState("");
       const [numOfUser, setNumOfUser] = useState();
       const [numOfOwner, setNumOfOwner] = useState();
       const [numOfParking, setNumOfParking] = useState();
       const [numOfEvaluate, setNumOfEvaluate] = useState();
+      const [userStatistical, setUserStatistical] = useState([]);
+      const [numOfBooking, setNumOfBooking] = useState();
+      const [revenue, setRevenue] = useState();
+      const [evaluateInDay, setEvaluateInDay] = useState();
+
+      const getUserStatisticalInCurrentMonth = async () => {
+            let date = new Date();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getUserStatistical(month, year);
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setUserStatistical(response.data.result);
+      };
+
+      const getBookingStatisticalInCurrentDate = async () => {
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getBookingStatistical(
+                  day,
+                  month,
+                  year
+            );
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setNumOfBooking(response.data.result.numOfBooking);
+            setRevenue(response.data.result.revenue);
+      };
+
+      const getNumOfEvaluateInCurrentDate = async () => {
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const response = await CountApi.getEvaluateStatistical(
+                  day,
+                  month,
+                  year
+            );
+            if (!response) {
+                  console.log("Some thing wrong");
+            }
+            setEvaluateInDay(response.data.result);
+      };
 
       const getAdminInfo = async () => {
             try {
@@ -22,6 +70,7 @@ const AdminWrapper = () => {
                               JSON.parse(jsonValue).result.lastName
                         }`
                   );
+                  setAdminAvatar(`${JSON.parse(jsonValue).result.avatar}`);
             } catch (error) {
                   console.log("Err when get token from local storage");
                   return false;
@@ -83,18 +132,23 @@ const AdminWrapper = () => {
                   await getCountUser();
                   await getCountParking();
                   await getCountEvaluate();
-            }
+                  await getUserStatisticalInCurrentMonth();
+                  await getBookingStatisticalInCurrentDate();
+                  await getNumOfEvaluateInCurrentDate();
+            };
             fetchData();
       }, []);
       return (
             <main>
                   <div className="main__container">
                         <div className="main__title">
-                              {/* <img src={hello} alt="hello" /> */}
-                              <img alt="hello" />
+                              <img src={hello} alt="hello" />
                               <div className="main__greeting">
                                     <h1>{adminFullName}</h1>
-                                    <p>Chào mừng bạn đã đến với giao diện Quản lý</p>
+                                    <p>
+                                          Chào mừng bạn đã đến với giao diện
+                                          Quản lý
+                                    </p>
                               </div>
                         </div>
 
@@ -148,38 +202,45 @@ const AdminWrapper = () => {
                               <div className="charts__left">
                                     <div className="charts__left__title">
                                           <div>
-                                                <h1>Daily reports</h1>
-                                                <p>Vietnam</p>
+                                                <h1>Báo cáo hằng tháng</h1>
+                                                <p>Số người dùng mới</p>
                                           </div>
-                                          <i className="fa fa-usd"></i>
                                     </div>
-                                    <Chart />
+                                    {userStatistical.length > 0 ? (
+                                          <Chart
+                                                userStatistical={
+                                                      userStatistical
+                                                }
+                                          />
+                                    ) : (
+                                          <></>
+                                    )}
                               </div>
                               <div className="charts__right">
                                     <div className="charts__right__title">
                                           <div>
-                                                <h1>Stats reports</h1>
-                                                <p>Vietnam</p>
+                                                <h1>Báo cáo hằng ngày</h1>
+                                                {/* <p>Vietnam</p> */}
                                           </div>
-                                          <i className="fa fa-usd"></i>
+                                          {/* <i className="fa fa-usd"></i> */}
                                     </div>
                                     <div className="charts__right__cards">
                                           <div className="card1">
-                                                <h1>Income</h1>
-                                                <p>$75,300</p>
+                                                <h1>booking</h1>
+                                                <p>{numOfBooking} lượt</p>
                                           </div>
                                           <div className="card2">
-                                                <h1>Sales</h1>
-                                                <p>$124,300</p>
+                                                <h1>doanh thu</h1>
+                                                <p>{revenue} VND</p>
                                           </div>
                                           <div className="card3">
-                                                <h1>Users</h1>
-                                                <p>$45,300</p>
+                                                <h1>đánh giá</h1>
+                                                <p>{evaluateInDay} lượt</p>
                                           </div>
-                                          <div className="card4">
+                                          {/* <div className="card4">
                                                 <h1>Orders</h1>
                                                 <p>$7501</p>
-                                          </div>
+                                          </div> */}
                                     </div>
                               </div>
                         </div>

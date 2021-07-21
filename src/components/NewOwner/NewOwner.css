@@ -1,8 +1,8 @@
-.newOwnerTitle{
+.main-container-title {
       display: flex;
       justify-content: center;
 }
 
-.parkingListWrapper{
+.parkingListWrapper {
       margin-top: 10px;
 }

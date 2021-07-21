@@ -50,10 +50,61 @@ const getNumOfEvaluate = async () => {
       }
 };
 
+const getUserStatistical = async (month, year) => {
+      try {
+            const token = await getToken();
+            const url = `${BaseURL}/adminParking/getUserStatistical/${month}&${year}`;
+            const headers = {
+                  headers: {
+                        "x-access-token": token,
+                  },
+            };
+            const res = await axios.get(url, headers);
+            return res;
+      } catch (error) {
+            console.log("Err when get statistical user:", error.message);
+      }
+};
+
+const getBookingStatistical = async (day, month, year) => {
+      try {
+            const token = await getToken();
+            const url = `${BaseURL}/adminParking/getNumberBookingStatisticalByDate/${day}&${month}&${year}`;
+            const headers = {
+                  headers: {
+                        "x-access-token": token,
+                  },
+            };
+            const res = await axios.get(url, headers);
+            return res;
+      } catch (error) {
+            console.log("Err when get statistical booking:", error.message);
+      }
+};
+
+const getEvaluateStatistical = async (day, month, year) => {
+      try {
+            const token = await getToken();
+            const url = `${BaseURL}/adminParking/getNumberEvaluateStatisticalByDate/${day}&${month}&${year}`;
+            const headers = {
+                  headers: {
+                        "x-access-token": token,
+                  },
+            };
+            const res = await axios.get(url, headers);
+            return res;
+      } catch (error) {
+            console.log("Err when get statistical user:", error.message);
+      }
+};
+
 const CountApi = {
       getNumOfUser,
       getNumOfParking,
       getNumOfEvaluate,
+      getUserStatistical,
+      getBookingStatistical,
+      getEvaluateStatistical,
 };
 
 export default CountApi;

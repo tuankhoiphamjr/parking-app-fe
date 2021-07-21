@@ -7,7 +7,7 @@ import routes from "./Routes";
 import { useEffect } from "react";
 // import { reactLocalStorage } from "reactjs-localstorage";
 
-const Home = ({ adminName, checkLoginSuccess }) => {
+const Home = ({ adminName, checkLoginSuccess}) => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
       // const [adminName, setAdminName] = useState("");
 
