@@ -6,6 +6,12 @@ main {
 
 .main__container {
       padding: 20px 35px;
+      opacity: 1;
+      transition: opacity .5s;
+}
+
+.main__container__close{
+      opacity: 0.2;
 }
 
 .main__title {
@@ -175,6 +181,53 @@ main {
 
 .cardTitle{
       font-size: 15px;
+}
+
+.schedule{
+      position: absolute;
+      top: 50vh;
+      right: 10px;
+      width: 70px;
+      height: 70px;
+      background-color: #f7e62d;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: .5s;
+}
+
+.scheduleIcon{
+      font-size: 35px !important;
+      z-index: 10000;
+}
+
+.scheduleOpen{
+      right: 365px;
+}
+
+.calendar{
+      position: absolute;
+      right: 0px;
+      top: 10vh;
+      height: 85vh;
+      width: 400px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f7e62d;
+      transition: all .5s ease-out;
+}
+
+.calendarClose{
+      display: none;
+}
+
+.resetIcon{
+      margin-top: 10px;
+      font-size: 40px !important;
 }
 
 @media only screen and (max-width: 855px) {

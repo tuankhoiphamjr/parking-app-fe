@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavBar from "./NavBar/NavBar";
-import SideBar from "./SideBar/SideBar";
-import routes from "./Routes";
+import NavBar from "../../components/NavBar/NavBar";
+import SideBar from "../../components/SideBar/SideBar";
+import routes from "../Routes";
 import { useEffect } from "react";
 // import { reactLocalStorage } from "reactjs-localstorage";
 
-const Home = ({ adminName, checkLoginSuccess}) => {
+const Home = ({ adminName, checkLoginSuccess, removeCookie }) => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
       // const [adminName, setAdminName] = useState("");
 
@@ -62,6 +62,7 @@ const Home = ({ adminName, checkLoginSuccess}) => {
                         closeSideBar={closeSideBar}
                         adminName={adminName}
                         checkLoginSuccess={checkLoginSuccess}
+                        removeCookie={removeCookie}
                   />
             </div>
       );

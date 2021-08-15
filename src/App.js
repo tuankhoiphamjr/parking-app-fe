@@ -2,35 +2,36 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import Header from "./components/Header";
-import LogHome from "./components/LogHome";
-import Footer from "./components/Footer";
-import Home from "./components/Home";
-import StartPage from "./components/StartPage";
+import Header from "./components/Header/Header";
+import LogHome from "./page/LogPage/LogHome";
+import Footer from "./components/Footer/Footer";
+import Home from "./page/Home/Home";
+import StartPage from "./page/StartPage/StartPage";
 import { useState, useEffect } from "react";
 
 import { reactLocalStorage } from "reactjs-localstorage";
 
+import { useCookies } from "react-cookie";
+
 function App() {
       const [adminName, setAdminName] = useState("");
+      const [cookies, setCookie, removeCookie] = useCookies(["admin"]);
 
       const checkLoginSuccess = async () => {
-            const jsonValue = await reactLocalStorage.getObject("admin");
-            if (!jsonValue || jsonValue.length === undefined) {
+            if (!cookies.admin || cookies.admin === undefined) {
                   window.location.href = "/login";
             }
       };
       const checkLoginFail = async () => {
-            const jsonValue = await reactLocalStorage.getObject("admin");
-            if (jsonValue.length !== undefined) {
+            if (cookies.admin !== undefined) {
+            console.log(cookies);
                   window.location.href = "/home";
             }
       };
 
       const setAdminInfo = async () => {
             try {
-                  const jsonValue = await reactLocalStorage.getObject("admin");
-                  setAdminName(`${JSON.parse(jsonValue).result.lastName}`);
+                  setAdminName(`${cookies.admin.result.lastName}`);
             } catch (error) {
                   console.log("Err when get token from local storage");
                   return false;
@@ -51,7 +52,12 @@ function App() {
                                           exact
                                           render={(props) => (
                                                 <>
-                                                      <StartPage />
+                                                      <StartPage
+                                                            cookies={cookies}
+                                                            setCookie={
+                                                                  setCookie
+                                                            }
+                                                      />
                                                 </>
                                           )}
                                     />
@@ -62,6 +68,10 @@ function App() {
                                                       <LogHome
                                                             checkLoginFail={
                                                                   checkLoginFail
+                                                            }
+                                                            cookies={cookies}
+                                                            setCookie={
+                                                                  setCookie
                                                             }
                                                       />
                                                 </>
@@ -78,6 +88,9 @@ function App() {
                                                             checkLoginSuccess={
                                                                   checkLoginSuccess
                                                             }
+                                                            removeCookie={
+                                                                  removeCookie
+                                                            }
                                                       />
                                                 </>
                                           )}
@@ -92,6 +105,9 @@ function App() {
                                                             }
                                                             checkLoginSuccess={
                                                                   checkLoginSuccess
+                                                            }
+                                                            removeCookie={
+                                                                  removeCookie
                                                             }
                                                       />
                                                 </>
@@ -108,6 +124,9 @@ function App() {
                                                             checkLoginSuccess={
                                                                   checkLoginSuccess
                                                             }
+                                                            removeCookie={
+                                                                  removeCookie
+                                                            }
                                                       />
                                                 </>
                                           )}
@@ -123,6 +142,9 @@ function App() {
                                                             }
                                                             checkLoginSuccess={
                                                                   checkLoginSuccess
+                                                            }
+                                                            removeCookie={
+                                                                  removeCookie
                                                             }
                                                       />
                                                 </>

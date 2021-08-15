@@ -1,10 +1,13 @@
 import "./AdminWrapper.css";
-import Chart from "../Charts/Chart";
+import Chart from "../../components/Charts/Chart";
 import { useState, useEffect } from "react";
 import hello from "../../assets/avatar/images.png";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
 import React from "react";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
+import {TodayOutlined,RotateLeftOutlined} from '@material-ui/icons';
 
 const AdminWrapper = () => {
       const [adminFullName, setAdminFullName] = useState("");
@@ -17,9 +20,10 @@ const AdminWrapper = () => {
       const [numOfBooking, setNumOfBooking] = useState();
       const [revenue, setRevenue] = useState();
       const [evaluateInDay, setEvaluateInDay] = useState();
+      const [date, setDate] = useState(new Date());
+      const [calendarOpen, setCalendarOpen] = useState(false);
 
-      const getUserStatisticalInCurrentMonth = async () => {
-            let date = new Date();
+      const getUserStatisticalInCurrentMonth = async (date) => {
             let month = date.getMonth() + 1;
             let year = date.getFullYear();
             const response = await CountApi.getUserStatistical(month, year);
@@ -29,8 +33,7 @@ const AdminWrapper = () => {
             setUserStatistical(response.data.result);
       };
 
-      const getBookingStatisticalInCurrentDate = async () => {
-            let date = new Date();
+      const getBookingStatisticalInCurrentDate = async (date) => {
             let day = date.getDate();
             let month = date.getMonth() + 1;
             let year = date.getFullYear();
@@ -46,8 +49,7 @@ const AdminWrapper = () => {
             setRevenue(response.data.result.revenue);
       };
 
-      const getNumOfEvaluateInCurrentDate = async () => {
-            let date = new Date();
+      const getNumOfEvaluateInCurrentDate = async (date) => {
             let day = date.getDate();
             let month = date.getMonth() + 1;
             let year = date.getFullYear();
@@ -126,21 +128,47 @@ const AdminWrapper = () => {
             }
       };
 
+      const openCalendar = () => {
+            setCalendarOpen(!calendarOpen);
+      };
+      
+      const resetCalendar = () => {
+            setDate(new Date());
+      };
+
+      const fetchCountData=async()=>{
+            await getAdminInfo();
+            await getCountUser();
+            await getCountParking();
+            await getCountEvaluate();
+      }
+
+      const fetchStatisticData = async (date) => {
+            await getUserStatisticalInCurrentMonth(date);
+            await getBookingStatisticalInCurrentDate(date);
+            await getNumOfEvaluateInCurrentDate(date);
+      };
       useEffect(() => {
-            const fetchData = async () => {
-                  await getAdminInfo();
-                  await getCountUser();
-                  await getCountParking();
-                  await getCountEvaluate();
-                  await getUserStatisticalInCurrentMonth();
-                  await getBookingStatisticalInCurrentDate();
-                  await getNumOfEvaluateInCurrentDate();
-            };
-            fetchData();
+            fetchCountData();
+            fetchStatisticData(date);
       }, []);
+
+      useEffect(() => {
+            fetchStatisticData(date);
+      }, [date])
       return (
             <main>
-                  <div className="main__container">
+                  <div className={calendarOpen ? "schedule scheduleOpen" : "schedule"} onClick={openCalendar} >
+                        <TodayOutlined className="scheduleIcon"/>
+                  </div>
+                  <div className={calendarOpen ? "calendar" : "calendarClose"}>
+                        <Calendar
+                              onChange={setDate}
+                              value={date}
+                        />
+                        <RotateLeftOutlined className="resetIcon" onClick={resetCalendar} />
+                  </div>
+                  <div className={calendarOpen ? "main__container main__container__close" : "main__container"}>
                         <div className="main__title">
                               <img src={hello} alt="hello" />
                               <div className="main__greeting">
@@ -151,7 +179,6 @@ const AdminWrapper = () => {
                                     </p>
                               </div>
                         </div>
-
                         <div className="main__cards">
                               <div className="card">
                                     <i className="fas fa-users fa-2x text-lightblue"></i>

@@ -11,9 +11,9 @@ const SideBar = ({
       closeSideBar,
       adminName,
       checkLoginSuccess,
+      removeCookie,
 }) => {
       let link = document.querySelectorAll(".sidebar__link");
-
       const dispatch = useDispatch();
       const handleLogOut = async () => {
             // const logOut = Promise.all([
@@ -23,6 +23,7 @@ const SideBar = ({
             // ]);
             await dispatch(userAction.signOut());
             await reactLocalStorage.clear();
+            await removeCookie("admin");
             await checkLoginSuccess();
       };
 

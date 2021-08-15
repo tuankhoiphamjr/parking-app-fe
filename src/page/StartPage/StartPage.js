@@ -1,20 +1,19 @@
 import React from "react";
 import { useEffect } from "react";
-import { reactLocalStorage } from "reactjs-localstorage";
-import LogInApi from "../api/LogInApi";
+import LogInApi from "../../api/LogInApi";
 import { useDispatch } from "react-redux";
-import userAction from "../redux/actions/userActions";
+import userAction from "../../redux/actions/userActions";
+import { reactLocalStorage } from "reactjs-localstorage";
 
-const StartPage = () => {
+const StartPage = ({ cookies, setCookie }) => {
       const dispatch = useDispatch();
       const getData = async () => {
             try {
-                  const jsonValue = await reactLocalStorage.getObject("admin");
-
-                  if (!jsonValue || JSON.parse(jsonValue) == null) {
+                  if (!cookies.admin || cookies.admin == null) {
                         window.location.href = "/login";
                   } else {
-                        const user = JSON.parse(jsonValue);
+                        const user = cookies.admin;
+                        console.log(user);
                         const res = await LogInApi.login({
                               phoneNumber: user.result.phoneNumber,
                               password: user.password,
@@ -27,6 +26,16 @@ const StartPage = () => {
                                           ...res.data,
                                           password: user.password,
                                     })
+                              );
+                              const expires = new Date();
+                              expires.setDate(Date.now() + 1000 * 60 * 60 * 24);
+                              setCookie(
+                                    "admin",
+                                    JSON.stringify({
+                                          ...res.data,
+                                          password: user.password,
+                                    }),
+                                    { path: "/", expires }
                               );
                               dispatch(userAction.signInUpSuccess(res.data));
                               window.location.href = "/home";

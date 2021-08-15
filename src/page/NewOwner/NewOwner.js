@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NewOwnerApi } from "../../api";
-import Parkings from "../Parkings/Parkings";
+import Parkings from "../../components/Parkings/Parkings";
 import "./NewOwner.css";
 import React from "react";
 
