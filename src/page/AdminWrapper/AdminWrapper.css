@@ -195,6 +195,7 @@ main {
       justify-content: center;
       align-items: center;
       transition: .5s;
+      cursor: pointer;
 }
 
 .scheduleIcon{

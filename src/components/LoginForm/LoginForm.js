@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { LogInApi } from "../../api";
-import { reactLocalStorage } from "reactjs-localstorage";
 import { useDispatch } from "react-redux";
 import userAction from "../../redux/actions/userActions";
 // import { useCookies } from "react-cookie";
 
+import { useHistory } from "react-router-dom";
+
 const LoginForm = ({ cookies, setCookie }) => {
       const [username, setUsername] = useState("");
       const [password, setPassword] = useState("");
+      const history = useHistory();
       const dispatch = useDispatch();
 
       const login = async (e) => {
@@ -24,8 +26,7 @@ const LoginForm = ({ cookies, setCookie }) => {
                   let response = await LogInApi.login(data);
                   if (response?.status) {
                         try {
-                              const expires = new Date();
-                              expires.setDate(Date.now() + 1000 * 60 * 60 * 24);
+                              const expires = new Date(Date.now() + 1000*60*60*24);
                               setCookie(
                                     "admin",
                                     JSON.stringify({
@@ -34,18 +35,13 @@ const LoginForm = ({ cookies, setCookie }) => {
                                     }),
                                     { path: "/", expires }
                               );
-                              await reactLocalStorage.setObject(
-                                    "admin",
-                                    JSON.stringify({
-                                          ...response.data,
-                                          password: password,
-                                    })
-                              );
                         } catch (error) {
                               console.log(error);
                         }
-                        dispatch(userAction.signInUpSuccess(response.data));
-                        window.location.href = "/home";
+                        dispatch(
+                              userAction.signInUpSuccess(response.data)
+                        );
+                        history.push("/home");
                   } else {
                         alert("Đăng nhập thất bại");
                   }

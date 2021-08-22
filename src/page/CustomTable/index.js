@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeData, Logo, Tips } from "./Utils";
 import { matchSorter } from "match-sorter";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { UserApi } from "../../api";
 import { Button } from "@material-ui/core";
 
@@ -11,6 +11,7 @@ import "react-table-v6/react-table.css";
 
 const CustomTable = () => {
       const [data, setData] = useState([]);
+      const { path, url } = useRouteMatch();
       useEffect(() => {
             const fetchData = async () => {
                   let data = await await UserApi.getAllUserInfo();
@@ -215,7 +216,7 @@ const CustomTable = () => {
                                                                   >
                                                                         <Link
                                                                               to={{
-                                                                                    pathname: `/users/${props.original._id}`,
+                                                                                    pathname: `${url}/${props.original._id}`,
                                                                                     data: props.original,
                                                                               }}
                                                                         >
@@ -223,9 +224,13 @@ const CustomTable = () => {
                                                                                     variant="contained"
                                                                                     color="primary"
                                                                                     size="small"
-                                                                                    style={{fontSize:12}}
+                                                                                    style={{
+                                                                                          fontSize: 12,
+                                                                                    }}
                                                                               >
-                                                                                    Xem chi tiết
+                                                                                    Xem
+                                                                                    chi
+                                                                                    tiết
                                                                               </Button>
                                                                         </Link>
                                                                   </div>

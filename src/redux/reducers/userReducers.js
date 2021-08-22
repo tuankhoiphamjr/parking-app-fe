@@ -1,13 +1,13 @@
 import { SIGN_OUT, SIGNIN_SUCCESS } from "../actionTypes";
 
-export const userReducers = (state = {}, action) => {
-      switch (action.type) {
+export const userReducers = (state = {}, { type, payload }) => {
+      switch (type) {
             case SIGNIN_SUCCESS:
-                  return { ...state, ...action.payload };
+                  return { ...state, ...payload };
 
             case SIGN_OUT:
                   return {};
             default:
-                  return {};
+                  return state;
       }
 };

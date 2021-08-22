@@ -1,30 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import "./SideBar.css";
 import logo from "../../assets/avatar/images.png";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { useDispatch } from "react-redux";
-import userAction from "../../redux/actions/userActions";
+import {  useSelector } from "react-redux";
 import React from "react";
 
-const SideBar = ({
-      sideBarOpen,
-      closeSideBar,
-      adminName,
-      checkLoginSuccess,
-      removeCookie,
-}) => {
+const SideBar = ({ sideBarOpen, closeSideBar, removeCookie }) => {
+      let match = useRouteMatch();
       let link = document.querySelectorAll(".sidebar__link");
-      const dispatch = useDispatch();
+      const user = useSelector((state) => state.user);
+      const { result } = user;
+
       const handleLogOut = async () => {
-            // const logOut = Promise.all([
-            //       dispatch(userAction.signOut()),
-            //       reactLocalStorage.clear(),
-            //       checkLoginSuccess(),
-            // ]);
-            await dispatch(userAction.signOut());
-            await reactLocalStorage.clear();
             await removeCookie("admin");
-            await checkLoginSuccess();
+            await reactLocalStorage.clear();
+            window.location.href = "/login";
       };
 
       const handleOnClick = (e) => {
@@ -43,7 +33,7 @@ const SideBar = ({
                   <div className="sidebar__title">
                         <div className="sidebar__img">
                               <img src={logo} alt="logo" />
-                              <h1>{adminName}</h1>
+                              <h1>{result.lastName}</h1>
                         </div>
                         <i
                               className="fa fa-times"
@@ -52,9 +42,9 @@ const SideBar = ({
                         ></i>
                   </div>
                   <div className="sidebar__menu">
-                        <div className={`sidebar__link active_menu_link`}>
+                        <div className={`sidebar__link`}>
                               <Link
-                                    to="/home"
+                                    to={`${match.url}/admin`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -66,7 +56,7 @@ const SideBar = ({
                         <h2>Người dùng</h2>
                         <div className={`sidebar__link `}>
                               <Link
-                                    to="/users"
+                                    to={`${match.url}/users`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -76,7 +66,7 @@ const SideBar = ({
                         </div>
                         <div className={`sidebar__link`}>
                               <Link
-                                    to="/notify"
+                                    to={`${match.url}/notify`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -86,7 +76,7 @@ const SideBar = ({
                         </div>
                         <div className={`sidebar__link`}>
                               <Link
-                                    to="/notify"
+                                    to={`${match.url}/notify`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -98,7 +88,7 @@ const SideBar = ({
                         <h2>Chủ bãi</h2>
                         <div className={`sidebar__link`}>
                               <Link
-                                    to="/newOwner"
+                                    to={`${match.url}/newOwner`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -108,7 +98,7 @@ const SideBar = ({
                         </div>
                         <div className={`sidebar__link`}>
                               <Link
-                                    to="/newOwner"
+                                    to={`${match.url}/newOwner`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >
@@ -118,7 +108,7 @@ const SideBar = ({
                         </div>
                         <div className={`sidebar__link`}>
                               <Link
-                                    to="/newOwner"
+                                    to={`${match.url}/newOwner`}
                                     style={{ width: "100%", height: "100%" }}
                                     onClick={handleOnClick}
                               >

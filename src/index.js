@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CookiesProvider } from "react-cookie";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
       <React.StrictMode>
-            <CookiesProvider>
-                  <App />
-            </CookiesProvider>
+            <Provider store={store}>
+                  <CookiesProvider>
+                        <App />
+                  </CookiesProvider>
+            </Provider>
       </React.StrictMode>,
       document.getElementById("root")
 );

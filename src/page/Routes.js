@@ -7,18 +7,18 @@ import UserInfo from "./UserInfo";
 
 const Routes = [
       {
-            path: "/home",
-            exact: false,
-            main: () => <AdminWrapper />,
+            path: "/admin",
+            exact: true,
+            main: (props) => <AdminWrapper props={props} />,
       },
       {
             path: "/notify",
-            exact: false,
+            exact: true,
             main: () => <Notification />,
       },
       {
             path: "/newOwner",
-            exact: false,
+            exact: true,
             main: () => <NewOwner />,
       },
       {
@@ -29,8 +29,7 @@ const Routes = [
       {
             path: "/users/:id",
             exact: true,
-            main: (props) => <UserInfo  props={props}/>,
+            main: (props) => <UserInfo props={props} />,
       },
-
 ];
 export default Routes;

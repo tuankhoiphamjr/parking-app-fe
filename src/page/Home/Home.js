@@ -1,28 +1,51 @@
 import React from "react";
-import { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+      BrowserRouter as Router,
+      Route,
+      Switch,
+      useRouteMatch,
+      Redirect,
+} from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
+import { CountApi } from "../../api";
 import routes from "../Routes";
-import { useEffect } from "react";
-// import { reactLocalStorage } from "reactjs-localstorage";
+import { useDispatch, useSelector } from "react-redux";
+import { adminActions } from "../../redux/actions";
 
-const Home = ({ adminName, checkLoginSuccess, removeCookie }) => {
+const Home = ({ checkLoginSuccess, removeCookie }) => {
       const [sideBarOpen, setSideBarOpen] = useState(false);
-      // const [adminName, setAdminName] = useState("");
+      const dispatch = useDispatch();
+      let match = useRouteMatch();
+      const user = useSelector((state) => state.user);
+      // const redirect = user.firstName === undefined;
+      const { accessToken, result } = user;
 
-      // const setAdminInfo = async () => {
-      //       try {
-      //             const jsonValue = await reactLocalStorage.getObject("admin");
-      //             setAdminName(`${JSON.parse(jsonValue).result.lastName}`);
-      //       } catch (error) {
-      //             console.log("Err when get token from local storage");
-      //             return false;
-      //       }
-      // };
+      const getCountUser = async () => {
+            try {
+                  let response = await CountApi.getNumOfUser();
+                  if (response?.status) {
+                        try {
+                              dispatch(adminActions.numberUser(response.data));
+                              // setNumOfOwner(response.data.numOfOwner);
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const fetchData = async () => {
+            await checkLoginSuccess();
+            await getCountUser();
+      };
 
       useEffect(() => {
-            checkLoginSuccess();
+            fetchData();
       }, []);
 
       const openSideBar = () => {
@@ -33,7 +56,7 @@ const Home = ({ adminName, checkLoginSuccess, removeCookie }) => {
             setSideBarOpen(false);
       };
 
-      const showContentMenu = (routes) => {
+      const showContentMenu = (routes, props) => {
             let result = null;
 
             if (routes.length > 0) {
@@ -41,7 +64,8 @@ const Home = ({ adminName, checkLoginSuccess, removeCookie }) => {
                         return (
                               <Route
                                     key={index}
-                                    path={route.path}
+                                    props={props}
+                                    path={`${match.path}${route.path}`}
                                     exact={route.exact}
                                     component={route.main}
                               />
@@ -50,18 +74,15 @@ const Home = ({ adminName, checkLoginSuccess, removeCookie }) => {
             }
             return result;
       };
+
       return (
             <div className="admin-wrapper">
                   <NavBar sideBarOpen={sideBarOpen} openSideBar={openSideBar} />
-                  <Router>
-                        <Switch>{showContentMenu(routes)}</Switch>
-                  </Router>
+                  <Switch>{showContentMenu(routes)}</Switch>
 
                   <SideBar
                         sideBarOpen={sideBarOpen}
                         closeSideBar={closeSideBar}
-                        adminName={adminName}
-                        checkLoginSuccess={checkLoginSuccess}
                         removeCookie={removeCookie}
                   />
             </div>

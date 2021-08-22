@@ -2,16 +2,14 @@ import "./AdminWrapper.css";
 import Chart from "../../components/Charts/Chart";
 import { useState, useEffect } from "react";
 import hello from "../../assets/avatar/images.png";
-import { reactLocalStorage } from "reactjs-localstorage";
 import { CountApi } from "../../api";
 import React from "react";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';
-import {TodayOutlined,RotateLeftOutlined} from '@material-ui/icons';
+import "react-calendar/dist/Calendar.css";
+import { TodayOutlined, RotateLeftOutlined } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
-const AdminWrapper = () => {
-      const [adminFullName, setAdminFullName] = useState("");
-      const [adminAvatar, setAdminAvatar] = useState("");
+const AdminWrapper = ({ props }) => {
       const [numOfUser, setNumOfUser] = useState();
       const [numOfOwner, setNumOfOwner] = useState();
       const [numOfParking, setNumOfParking] = useState();
@@ -22,6 +20,9 @@ const AdminWrapper = () => {
       const [evaluateInDay, setEvaluateInDay] = useState();
       const [date, setDate] = useState(new Date());
       const [calendarOpen, setCalendarOpen] = useState(false);
+
+      const user = useSelector((state) => state.user);
+      const { result } = user;
 
       const getUserStatisticalInCurrentMonth = async (date) => {
             let month = date.getMonth() + 1;
@@ -62,21 +63,6 @@ const AdminWrapper = () => {
                   console.log("Some thing wrong");
             }
             setEvaluateInDay(response.data.result);
-      };
-
-      const getAdminInfo = async () => {
-            try {
-                  const jsonValue = await reactLocalStorage.getObject("admin");
-                  setAdminFullName(
-                        `${JSON.parse(jsonValue).result.firstName} ${
-                              JSON.parse(jsonValue).result.lastName
-                        }`
-                  );
-                  setAdminAvatar(`${JSON.parse(jsonValue).result.avatar}`);
-            } catch (error) {
-                  console.log("Err when get token from local storage");
-                  return false;
-            }
       };
 
       const getCountUser = async () => {
@@ -131,17 +117,16 @@ const AdminWrapper = () => {
       const openCalendar = () => {
             setCalendarOpen(!calendarOpen);
       };
-      
+
       const resetCalendar = () => {
             setDate(new Date());
       };
 
-      const fetchCountData=async()=>{
-            await getAdminInfo();
+      const fetchCountData = async () => {
             await getCountUser();
             await getCountParking();
             await getCountEvaluate();
-      }
+      };
 
       const fetchStatisticData = async (date) => {
             await getUserStatisticalInCurrentMonth(date);
@@ -149,30 +134,47 @@ const AdminWrapper = () => {
             await getNumOfEvaluateInCurrentDate(date);
       };
       useEffect(() => {
-            fetchCountData();
-            fetchStatisticData(date);
+            console.log(props);
+            const fetchData = async (date) => {
+                  await fetchCountData();
+                  await fetchStatisticData(date);
+            };
+            fetchData(date);
       }, []);
 
       useEffect(() => {
             fetchStatisticData(date);
-      }, [date])
+      }, [date]);
       return (
             <main>
-                  <div className={calendarOpen ? "schedule scheduleOpen" : "schedule"} onClick={openCalendar} >
-                        <TodayOutlined className="scheduleIcon"/>
+                  <div
+                        className={
+                              calendarOpen
+                                    ? "schedule scheduleOpen"
+                                    : "schedule"
+                        }
+                        onClick={openCalendar}
+                  >
+                        <TodayOutlined className="scheduleIcon" />
                   </div>
                   <div className={calendarOpen ? "calendar" : "calendarClose"}>
-                        <Calendar
-                              onChange={setDate}
-                              value={date}
+                        <Calendar onChange={setDate} value={date} />
+                        <RotateLeftOutlined
+                              className="resetIcon"
+                              onClick={resetCalendar}
                         />
-                        <RotateLeftOutlined className="resetIcon" onClick={resetCalendar} />
                   </div>
-                  <div className={calendarOpen ? "main__container main__container__close" : "main__container"}>
+                  <div
+                        className={
+                              calendarOpen
+                                    ? "main__container main__container__close"
+                                    : "main__container"
+                        }
+                  >
                         <div className="main__title">
                               <img src={hello} alt="hello" />
                               <div className="main__greeting">
-                                    <h1>{adminFullName}</h1>
+                                    <h1>{`${result.firstName} ${result.lastName}`}</h1>
                                     <p>
                                           Chào mừng bạn đã đến với giao diện
                                           Quản lý

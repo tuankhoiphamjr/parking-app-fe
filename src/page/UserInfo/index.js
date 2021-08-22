@@ -12,7 +12,7 @@ const UserInfo = ({ props }) => {
       const [showAlert, setShowAlert] = useState(false);
       const [alertType, setAlertType] = useState("success");
       const handleBackButton = () => {
-            props.history.push("/users");
+            props.history.push("/home/users");
       };
 
       const onSubmit = async () => {
@@ -43,6 +43,7 @@ const UserInfo = ({ props }) => {
       };
 
       useEffect(() => {
+            console.log(props);
             let pathnameArraySplit = props.location.pathname.split("/");
             let id = pathnameArraySplit[pathnameArraySplit.length - 1];
             const getData = async () => {
