@@ -10,10 +10,6 @@ import { TodayOutlined, RotateLeftOutlined } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 
 const AdminWrapper = ({ props }) => {
-      const [numOfUser, setNumOfUser] = useState();
-      const [numOfOwner, setNumOfOwner] = useState();
-      const [numOfParking, setNumOfParking] = useState();
-      const [numOfEvaluate, setNumOfEvaluate] = useState();
       const [userStatistical, setUserStatistical] = useState([]);
       const [numOfBooking, setNumOfBooking] = useState();
       const [revenue, setRevenue] = useState();
@@ -21,7 +17,9 @@ const AdminWrapper = ({ props }) => {
       const [date, setDate] = useState(new Date());
       const [calendarOpen, setCalendarOpen] = useState(false);
 
+      const admin = useSelector((state) => state.admin);
       const user = useSelector((state) => state.user);
+      const { numOfUser, numOfOwner, numOfParking, numOfEvaluate } = admin;
       const { result } = user;
 
       const getUserStatisticalInCurrentMonth = async (date) => {
@@ -65,55 +63,6 @@ const AdminWrapper = ({ props }) => {
             setEvaluateInDay(response.data.result);
       };
 
-      const getCountUser = async () => {
-            try {
-                  let response = await CountApi.getNumOfUser();
-                  if (response?.status) {
-                        try {
-                              setNumOfUser(response.data.numOfUser);
-                              setNumOfOwner(response.data.numOfOwner);
-                        } catch (error) {
-                              console.log(error);
-                        }
-                  }
-            } catch (error) {
-                  console.log("Err when get data from api");
-                  return false;
-            }
-      };
-
-      const getCountParking = async () => {
-            try {
-                  let response = await CountApi.getNumOfParking();
-                  if (response?.status) {
-                        try {
-                              setNumOfParking(response.data.numOfParking);
-                        } catch (error) {
-                              console.log(error);
-                        }
-                  }
-            } catch (error) {
-                  console.log("Err when get data from api");
-                  return false;
-            }
-      };
-
-      const getCountEvaluate = async () => {
-            try {
-                  let response = await CountApi.getNumOfEvaluate();
-                  if (response?.status) {
-                        try {
-                              setNumOfEvaluate(response.data.numOfEvaluate);
-                        } catch (error) {
-                              console.log(error);
-                        }
-                  }
-            } catch (error) {
-                  console.log("Err when get data from api");
-                  return false;
-            }
-      };
-
       const openCalendar = () => {
             setCalendarOpen(!calendarOpen);
       };
@@ -122,21 +71,13 @@ const AdminWrapper = ({ props }) => {
             setDate(new Date());
       };
 
-      const fetchCountData = async () => {
-            await getCountUser();
-            await getCountParking();
-            await getCountEvaluate();
-      };
-
       const fetchStatisticData = async (date) => {
             await getUserStatisticalInCurrentMonth(date);
             await getBookingStatisticalInCurrentDate(date);
             await getNumOfEvaluateInCurrentDate(date);
       };
       useEffect(() => {
-            console.log(props);
             const fetchData = async (date) => {
-                  await fetchCountData();
                   await fetchStatisticData(date);
             };
             fetchData(date);

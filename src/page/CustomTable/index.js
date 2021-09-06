@@ -4,23 +4,27 @@ import { matchSorter } from "match-sorter";
 import { Link, useRouteMatch } from "react-router-dom";
 import { UserApi } from "../../api";
 import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 // Import React Table
 import ReactTable from "react-table-v6";
 import "react-table-v6/react-table.css";
 
 const CustomTable = () => {
-      const [data, setData] = useState([]);
+      // const [data, setData] = useState([]);
+      const admin = useSelector((state) => state.admin);
+      const { userData } = admin;
+      const data = userData;
       const { path, url } = useRouteMatch();
-      useEffect(() => {
-            const fetchData = async () => {
-                  let data = await await UserApi.getAllUserInfo();
-                  data = data.filter((element) => element.role !== "admin");
-                  setData(data);
-            };
+      // useEffect(() => {
+      //       const fetchData = async () => {
+      //             let data = await await UserApi.getAllUserInfo();
+      //             data = data.filter((element) => element.role !== "admin");
+      //             setData(data);
+      //       };
 
-            fetchData();
-      }, []);
+      //       fetchData();
+      // }, []);
       return (
             <main>
                   <div className="main__container">

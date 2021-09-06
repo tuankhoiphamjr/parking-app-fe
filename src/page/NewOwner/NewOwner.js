@@ -3,15 +3,23 @@ import { NewOwnerApi } from "../../api";
 import Parkings from "../../components/Parkings/Parkings";
 import "./NewOwner.css";
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { adminActions } from "../../redux/actions";
 
 const NewOwner = () => {
-      const [listParking, setListParking] = useState([]);
+      // const [listParking, setListParking] = useState([]);
+      const dispatch = useDispatch();
       const getListParking = async () => {
             try {
                   let response = await NewOwnerApi.getListNewParking();
                   if (response?.status) {
                         try {
-                              setListParking(response.data.result);
+                              const listParking = response.data.result;
+                              dispatch(
+                                    adminActions.getAllParkingNeedVerified({
+                                          listParking,
+                                    })
+                              );
                               return true;
                         } catch (error) {
                               console.log(error);
@@ -22,6 +30,9 @@ const NewOwner = () => {
                   return false;
             }
       };
+
+      const admin = useSelector((state) => state.admin);
+      const { listParking } = admin;
 
       const acceptParkingButton = async (parkingId, ownerId) => {
             try {
@@ -46,12 +57,6 @@ const NewOwner = () => {
             }
       };
 
-      useEffect(() => {
-            const fetchData = async () => {
-                  await getListParking();
-            };
-            fetchData();
-      }, []);
       return (
             <main>
                   <div className="main__container">

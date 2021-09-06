@@ -5,11 +5,10 @@ import {
       Route,
       Switch,
       useRouteMatch,
-      Redirect,
 } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
-import { CountApi } from "../../api";
+import { CountApi, UserApi, NewOwnerApi } from "../../api";
 import routes from "../Routes";
 import { useDispatch, useSelector } from "react-redux";
 import { adminActions } from "../../redux/actions";
@@ -24,11 +23,53 @@ const Home = ({ checkLoginSuccess, removeCookie }) => {
 
       const getCountUser = async () => {
             try {
-                  let response = await CountApi.getNumOfUser();
+                  let userResponse = await CountApi.getNumOfUser();
+                  let parkingResponse = await CountApi.getNumOfParking();
+                  let evaluateResponse = await CountApi.getNumOfEvaluate();
+
+                  if (
+                        userResponse?.status &&
+                        parkingResponse?.status &&
+                        evaluateResponse?.status
+                  ) {
+                        try {
+                              const data = {
+                                    numOfUser: userResponse.data.numOfUser,
+                                    numOfOwner: userResponse.data.numOfOwner,
+                                    numOfParking:
+                                          parkingResponse.data.numOfParking,
+                                    numOfEvaluate:
+                                          evaluateResponse.data.numOfEvaluate,
+                              };
+                              dispatch(adminActions.numberUser(data));
+                        } catch (error) {
+                              console.log(error);
+                        }
+                  }
+            } catch (error) {
+                  console.log("Err when get data from api");
+                  return false;
+            }
+      };
+
+      const getUserData = async () => {
+            let userData = await await UserApi.getAllUserInfo();
+            userData = userData.filter((element) => element.role !== "admin");
+            dispatch(adminActions.getAllUserInfo({ userData }));
+      };
+
+      const getListParking = async () => {
+            try {
+                  let response = await NewOwnerApi.getListNewParking();
                   if (response?.status) {
                         try {
-                              dispatch(adminActions.numberUser(response.data));
-                              // setNumOfOwner(response.data.numOfOwner);
+                              const listParking = response.data.result;
+                              dispatch(
+                                    adminActions.getAllParkingNeedVerified({
+                                          listParking,
+                                    })
+                              );
+                              return true;
                         } catch (error) {
                               console.log(error);
                         }
@@ -42,6 +83,8 @@ const Home = ({ checkLoginSuccess, removeCookie }) => {
       const fetchData = async () => {
             await checkLoginSuccess();
             await getCountUser();
+            await getUserData();
+            await getListParking();
       };
 
       useEffect(() => {

@@ -1,4 +1,8 @@
-import { NUMBER_USER } from "../actionTypes";
+import {
+      NUMBER_USER,
+      ALL_USER_DATA,
+      ALL_PARKING_NEED_VERIFIED,
+} from "../actionTypes";
 
 const numberUser = (count) => {
       return {
@@ -7,8 +11,23 @@ const numberUser = (count) => {
       };
 };
 
+const getAllUserInfo = (data) => {
+      return {
+            type: ALL_USER_DATA,
+            payload: data,
+      };
+};
+const getAllParkingNeedVerified = (parkings) => {
+      return {
+            type: ALL_PARKING_NEED_VERIFIED,
+            payload: parkings,
+      };
+};
+
 let adminActions = {
       numberUser,
+      getAllUserInfo,
+      getAllParkingNeedVerified,
 };
 
 export default adminActions;
